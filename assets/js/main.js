@@ -102,12 +102,6 @@
       gsap.from('.principle', { y: 24, opacity: 0, stagger: .1, duration: .55, ease: 'power3.out', delay: .3 });
       gsap.from('.fact', { y: 20, opacity: 0, stagger: .08, duration: .5, ease: 'back.out(1.6)', delay: .4 });
     },
-    fund: function () {
-      gsap.fromTo('.gs-track', { '--fill': 0 }, { '--fill': 1, duration: 1.3, ease: 'power2.inOut' });
-      gsap.from('.gs-end', { y: 20, opacity: 0, stagger: .5, duration: .6 });
-      gsap.from('.gs-item', { y: 40, opacity: 0, scale: .6, stagger: .22, duration: .6, ease: 'back.out(2)', delay: .2 });
-      gsap.from('.gs-text', { y: 20, opacity: 0, duration: .6, delay: 1.1 });
-    },
     how: function () {
       gsap.from('.step-card', { y: 50, rotation: -6, opacity: 0, duration: .8, ease: 'back.out(1.5)' });
       gsap.from('.step-list li', { x: -16, opacity: 0, stagger: .08, duration: .45, delay: .15 });
@@ -285,6 +279,16 @@
   gsap.timeline({ scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .6 } })
     .to('.hero-copy', { y: -80, opacity: 0, ease: 'none' }, 0)
     .to('.island-wrap', { scale: 1.15, yPercent: 8, opacity: .2, ease: 'none' }, 0);
+
+  /* Grant size: scrubbed with the scroll, like v1. Line draws, amounts fade in,
+     each step pops up in turn (bouncy), then the description. Reverses on scroll up. */
+  gsap.timeline({ scrollTrigger: { trigger: '#fund', start: 'top 70%', end: 'center 40%', scrub: 1 } })
+    .from('#fund .how-head', { y: 30, opacity: 0, duration: .4 })
+    .fromTo('.gs-track', { '--fill': 0 }, { '--fill': 1, duration: 1.6, ease: 'none' }, .2)
+    .from('.gs-end', { y: 24, opacity: 0, stagger: 1.1, duration: .5 }, .2)
+    .from('.gs-item', { y: 60, opacity: 0, scale: .4, stagger: .32, duration: .55, ease: 'back.out(2.4)' }, .45)
+    .from('.gs-item small', { y: 10, opacity: 0, stagger: .32, duration: .4 }, .65)
+    .from('.gs-text', { y: 30, opacity: 0, duration: .5 }, 1.6);
 
   /* Each section's entrance plays once, when it scrolls into view */
   Object.keys(entrances).forEach(function (id) {
