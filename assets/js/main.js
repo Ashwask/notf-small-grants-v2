@@ -98,14 +98,15 @@
   var fillWords = splitWords($('.fill-text'));
   var entrances = {
     about: function () {
-      gsap.fromTo(fillWords, { color: 'rgba(16,54,87,.16)' }, { color: function (i, el) { return el.closest('em') ? '#3C5631' : '#103657'; }, stagger: .04, duration: .4, ease: 'none' });
+      gsap.fromTo(fillWords, { color: 'rgba(16,54,87,.16)' }, { color: function (i, el) { return el.closest('em') ? '#3C5631' : '#2C2B32'; }, stagger: .04, duration: .4, ease: 'none' });
       gsap.from('.principle', { y: 24, opacity: 0, stagger: .1, duration: .55, ease: 'power3.out', delay: .3 });
-      gsap.from('.stamp', { scale: 0, rotation: -45, opacity: 0, stagger: .12, duration: .7, ease: 'back.out(2.2)', delay: .5 });
+      gsap.from('.fact', { y: 20, opacity: 0, stagger: .08, duration: .5, ease: 'back.out(1.6)', delay: .4 });
     },
     fund: function () {
-      gsap.from('.theme', { y: 24, opacity: 0, stagger: .07, duration: .55, ease: 'power3.out' });
-      gsap.from('.size', { y: 20, opacity: 0, duration: .55, delay: .35 });
-      gsap.fromTo('.size-fill', { scaleX: 0 }, { scaleX: 1, duration: 1.1, delay: .5, ease: 'power2.inOut' });
+      gsap.fromTo('.gs-track', { '--fill': 0 }, { '--fill': 1, duration: 1.3, ease: 'power2.inOut' });
+      gsap.from('.gs-end', { y: 20, opacity: 0, stagger: .5, duration: .6 });
+      gsap.from('.gs-item', { y: 40, opacity: 0, scale: .6, stagger: .22, duration: .6, ease: 'back.out(2)', delay: .2 });
+      gsap.from('.gs-text', { y: 20, opacity: 0, duration: .6, delay: 1.1 });
     },
     how: function () {
       gsap.fromTo('.timeline', { '--fill': 0 }, { '--fill': 1, duration: 1.2, ease: 'power2.inOut' });
@@ -204,9 +205,6 @@
       var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) setNavLabel(e.target.dataset.nav); }); }, { rootMargin: '-50% 0px -50% 0px' });
       $$('[data-nav]').forEach(function (s) { io.observe(s); });
     }
-    $('.statement').style.cssText = 'position:relative;opacity:1;padding:10vh 24px';
-    $$('.stat').forEach(function (s) { s.style.cssText = 'position:static;opacity:1;margin:0 auto 20px'; });
-    $('.stats').style.height = 'auto';
     $('.hero').style.height = 'auto';
     return;
   }
@@ -233,17 +231,10 @@
     .to('.hero-btns', { opacity: 1, y: 0, duration: .6, ease: 'back.out(2)', clearProps: 'transform' }, '-=0.5')
     .to('.island', { y: 0, opacity: 1, duration: 1.3, ease: 'back.out(1.2)' }, '-=1.1');
 
-  /* 1. Hero: short pin. Video zooms away, statement, then stats in quick succession */
-  var heroTl = gsap.timeline({ scrollTrigger: { trigger: '.hero', start: 'top top', end: '+=110%', scrub: .8, pin: true, anticipatePin: 1 } });
-  heroTl
-    .to('.hero-copy', { y: -100, opacity: 0, duration: .6, ease: 'none' }, 0)
-    .to('.island-wrap', { scale: 1.7, yPercent: -10, opacity: 0, filter: 'blur(14px)', duration: 1, ease: 'power1.in' }, 0)
-    .to('.clouds-hero', { scale: 1.2, duration: 1.2 }, 0)
-    .to('.sky', { opacity: .6, duration: 1 }, 0)
-    .set('.statement', { opacity: 1, pointerEvents: 'auto' }, .55)
-    .fromTo('.statement-text', { y: 50, opacity: 0, filter: 'blur(10px)' }, { y: 0, opacity: 1, filter: 'blur(0px)', duration: .5 }, .55)
-    .fromTo('.stat', { y: 30, opacity: 0 }, { y: 0, opacity: 1, stagger: .12, duration: .4, ease: 'back.out(1.6)' }, .85)
-    .to({}, { duration: .4 });
+  /* 1. Hero: gentle parallax as you scroll away (no pin) */
+  gsap.timeline({ scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .6 } })
+    .to('.hero-copy', { y: -80, opacity: 0, ease: 'none' }, 0)
+    .to('.island-wrap', { scale: 1.15, yPercent: 8, opacity: .2, ease: 'none' }, 0);
 
   /* Each section's entrance plays once, when it scrolls into view */
   Object.keys(entrances).forEach(function (id) {

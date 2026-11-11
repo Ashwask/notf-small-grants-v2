@@ -146,12 +146,6 @@ img, svg { display: block; max-width: 100%; }
 .island { width: 100%; height: auto; display: block; aspect-ratio: 3 / 2; object-fit: cover; }
 /* Feather the video's cloud edges into the sky; the video itself is unaltered */
 .island-wrap { -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 72%, transparent 100%); mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 72%, transparent 100%); }
-.statement { position: absolute; inset: 0; z-index: 4; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 24px; opacity: 0; pointer-events: none; }
-.statement-text { font-family: var(--display); font-weight: 700; font-size: clamp(30px, 4vw, 54px); line-height: 1.12; color: var(--blue); max-width: 860px; letter-spacing: -.02em; text-wrap: balance; }
-.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 220px)); justify-content: center; gap: 14px; width: 100%; margin-top: 40px; }
-.stat { background: rgba(255,255,255,.75); border-radius: 18px; padding: 18px 16px; box-shadow: 0 10px 26px rgba(44,43,50,.08); display: flex; flex-direction: column; gap: 4px; }
-.stat b { font-family: var(--display); font-size: clamp(26px, 2.6vw, 34px); color: var(--notf-forest); font-weight: 700; line-height: 1.05; }
-.stat span { font-size: 14px; color: var(--ink); line-height: 1.35; }
 
 /* ---------- 2. WHAT (one section, four tabs) ---------- */
 .what { position: relative; padding: 12vh 0 120px; background: var(--sky); }
@@ -194,16 +188,16 @@ img, svg { display: block; max-width: 100%; }
 .fit-block .how-head { margin-bottom: 18px; }
 .sec, .faq { scroll-margin-top: 0; }
 
-/* About: statement + stamps beside a clean video frame, then three principle cards */
+/* About: statement, lead and four facts beside the video, then three principle cards */
 .about-top { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(24px, 4vw, 52px); align-items: center; }
 .fill-text { font-size: clamp(22px, 2.1vw, 30px); color: var(--blue); line-height: 1.2; }
 .fill-text em { font-style: normal; color: var(--green); }
-.stamps { display: flex; gap: 10px; margin-top: 24px; }
-.stamp { width: clamp(84px, 7vw, 100px); height: auto; flex-shrink: 0; filter: drop-shadow(0 6px 14px rgba(43,43,43,.18)); }
-.stamp text { font-family: var(--display); }
-.stamp-arc { font-size: 10.5px; font-weight: 600; letter-spacing: 3px; }
-.stamp-main { font-weight: 700; letter-spacing: -0.02em; }
-.stamp-sub { font-family: var(--body) !important; font-size: 13px; font-weight: 500; opacity: .9; }
+.about-title { font-size: clamp(28px, 3vw, 44px); line-height: 1.12; color: var(--navy); text-wrap: balance; }
+.about-copy .fill-text { margin-top: 14px; font-size: clamp(17px, 1.4vw, 20px); font-weight: 500; line-height: 1.5; color: var(--ink); }
+.facts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; }
+.fact { background: #fff; border-radius: 16px; padding: 14px 16px; box-shadow: 0 8px 20px rgba(44,43,50,.06); display: flex; flex-direction: column; gap: 2px; }
+.fact b { font-size: clamp(22px, 2vw, 28px); font-weight: 700; color: var(--notf-forest); letter-spacing: -.02em; line-height: 1.1; }
+.fact span { font-size: 13.5px; color: var(--muted); line-height: 1.35; }
 .about-frame { position: relative; width: 100%; aspect-ratio: 16 / 10; border-radius: 20px; overflow: hidden; background: var(--sky-deep); box-shadow: 0 20px 44px rgba(44,43,50,.14); }
 .grow-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .principles { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 26px; }
@@ -213,26 +207,22 @@ img, svg { display: block; max-width: 100%; }
 .principle h4 { font-size: 18px; color: var(--navy); margin-bottom: 6px; }
 .principle p { font-size: 14.5px; color: var(--ink); line-height: 1.5; }
 
-/* What we fund: all themes visible, plus a grant-size strip */
-.themes { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-.theme { background: #fff; border-radius: 18px; padding: 18px 20px; box-shadow: 0 8px 22px rgba(44,43,50,.06); transition: translate .3s var(--ease-spring), box-shadow .3s ease; }
-.theme:hover { translate: 0 -4px; box-shadow: 0 16px 30px rgba(44,43,50,.1); }
-.theme > i { width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; background: var(--notf-cream); color: var(--notf-terracotta); font-size: 17px; margin-bottom: 12px; }
-.theme h4 { font-size: 18px; color: var(--navy); }
-.theme-eg { font-size: 11.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--notf-forest); margin: 4px 0 8px; }
-.theme p:last-child { font-size: 14.5px; color: var(--ink); line-height: 1.5; }
-.theme-more { background: transparent; border: 1.5px dashed rgba(197,86,44,.4); box-shadow: none; }
-.theme-more > i { background: #fff; }
-.size { margin-top: 22px; background: linear-gradient(180deg, #fff, var(--notf-cream)); border: 1px solid rgba(60,86,49,.1); border-radius: 18px; padding: 18px 22px 20px; }
-.size-facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-.size-facts div { display: flex; flex-direction: column; }
-.size-facts b { font-family: var(--display); font-size: clamp(19px, 1.8vw, 24px); font-weight: 600; color: var(--notf-forest); letter-spacing: -.01em; }
-.size-facts span { font-size: 13px; color: var(--muted); }
-.size-bar { position: relative; height: 8px; margin-top: 16px; border-radius: 8px; background: var(--notf-cream-deep); }
-.size-fill { position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(90deg, var(--notf-terracotta), var(--notf-mustard)); transform-origin: left; }
-.size-bar em { position: absolute; top: 14px; font-style: normal; font-size: 12px; font-weight: 600; color: var(--muted); }
-.size-bar em:first-of-type { left: 0; } .size-bar em:last-of-type { right: 0; }
-.size { padding-bottom: 34px; }
+/* Grant size: from ₹50,000 ── growing steps ── to ₹2,00,000 */
+.gs-line { display: grid; grid-template-columns: auto 1fr auto; align-items: end; gap: 28px; margin-top: 30px; }
+.gs-end { font-family: var(--display); font-weight: 700; font-size: clamp(24px, 2.6vw, 38px); color: var(--navy); white-space: nowrap; letter-spacing: -.02em; line-height: 1; transform: translateY(50%); }
+.gs-end:last-child { color: var(--notf-terracotta-dark); }
+.gs-track { --fill: 1; position: relative; list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); align-items: end; gap: 10px; padding-bottom: 26px; }
+.gs-track::before, .gs-track::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; border-radius: 3px; background: var(--notf-cream-deep); }
+.gs-track::after { background: linear-gradient(90deg, var(--notf-olive), var(--notf-mustard), var(--notf-terracotta)); transform-origin: left; transform: scaleX(var(--fill)); }
+.gs-item { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
+.gs-icon { display: flex; align-items: center; justify-content: center; border-radius: 16px; background: #fff; color: var(--notf-terracotta); box-shadow: 0 10px 24px rgba(44,43,50,.1), inset 0 0 0 1px rgba(197,86,44,.12); transition: translate .3s var(--ease-spring); }
+.gs-item:hover .gs-icon { translate: 0 -4px; }
+.gs-item small { font-size: 14px; font-weight: 600; color: var(--notf-forest); }
+.gs-1 .gs-icon { width: 52px; height: 52px; font-size: 20px; }
+.gs-2 .gs-icon { width: 70px; height: 70px; font-size: 26px; }
+.gs-3 .gs-icon { width: 90px; height: 90px; font-size: 34px; }
+.gs-4 .gs-icon { width: 112px; height: 112px; font-size: 42px; background: var(--notf-terracotta-dark); color: #fff; box-shadow: inset 0 1px 0 rgba(255,255,255,.3), 0 14px 30px rgba(197,86,44,.35); }
+.gs-text { max-width: 440px; margin: 40px 0 0 auto; color: var(--ink); font-size: 17px; line-height: 1.6; }
 
 /* How it works: four-step timeline, all visible */
 .how-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px 24px; margin-bottom: 30px; }
@@ -383,9 +373,7 @@ img, svg { display: block; max-width: 100%; }
   .hero-place { font-size: clamp(13px, 3.857vw, 16.7px); }
   .hero-place .nw { display: block; }
   .hero-btns .btn { padding: 0 20px; }
-  .stats { grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 26px; }
-  .stat { padding: 14px 12px; }
-  .island-wrap { bottom: 9vh; width: 108vw; left: 50%; right: auto; margin-left: -54vw; }
+      .island-wrap { bottom: 9vh; width: 108vw; left: 50%; right: auto; margin-left: -54vw; }
   .wrap { padding: 0 16px; }
   .sec { padding: 64px 0; }
   .faq { padding: 64px 0 110px; }
@@ -398,12 +386,20 @@ img, svg { display: block; max-width: 100%; }
   .what-tabs .t-short { display: inline; }
     .what-card { padding: 18px 16px; border-radius: 20px; }
   .checks { grid-template-columns: 1fr; }
+  .gs-line { grid-template-columns: 1fr 1fr; gap: 14px 10px; }
+  .gs-end { transform: none; font-size: 22px; }
+  .gs-end:first-child { grid-row: 1; grid-column: 1; }
+  .gs-end:last-child { grid-row: 1; grid-column: 2; text-align: right; }
+  .gs-track { grid-column: 1 / -1; grid-row: 2; gap: 6px; padding-bottom: 20px; }
+  .gs-item small { font-size: 11.5px; }
+  .gs-1 .gs-icon { width: 40px; height: 40px; font-size: 15px; } .gs-2 .gs-icon { width: 50px; height: 50px; font-size: 19px; }
+  .gs-3 .gs-icon { width: 60px; height: 60px; font-size: 23px; } .gs-4 .gs-icon { width: 72px; height: 72px; font-size: 27px; }
+  .gs-text { margin: 22px 0 0; font-size: 15.5px; }
   .about-top { grid-template-columns: 1fr; gap: 20px; }
   .principles { grid-template-columns: 1fr; gap: 10px; }
   .principle { display: grid; grid-template-columns: 40px 1fr; column-gap: 14px; padding: 16px; }
   .principle > i { grid-row: 1 / span 2; margin: 0; }
-  .stamp { width: 88px; }
-  .themes { grid-template-columns: 1fr; gap: 10px; }
+    .themes { grid-template-columns: 1fr; gap: 10px; }
   .theme { display: grid; grid-template-columns: 40px 1fr; column-gap: 14px; padding: 16px; }
   .theme > i { grid-row: 1 / span 3; margin: 0; }
   .size-facts { grid-template-columns: 1fr; gap: 10px; }
