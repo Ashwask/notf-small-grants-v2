@@ -40,7 +40,7 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: clip; } /* zoomed hero island must never cause sideways scroll */
 body { font-family: var(--body); color: var(--ink); background: var(--sky); line-height: 1.55; overflow-x: clip; -webkit-font-smoothing: antialiased; }
 h1, h2, h3, h4 { font-family: var(--display); font-weight: 700; color: var(--blue); letter-spacing: -0.02em; line-height: 1.1; }
 a { color: inherit; }
@@ -131,7 +131,8 @@ img, svg { display: block; max-width: 100%; }
 .clouds-foot i:nth-child(5) { width: 40vw; left: -5vw; bottom: -6vh; }
 
 /* ---------- 1. HERO ---------- */
-.hero { position: relative; height: 100vh; min-height: 640px; overflow: hidden; }
+.hero { position: relative; z-index: 5; height: 100vh; min-height: 640px; overflow: visible; } /* island may float over the next section while scrolling */
+.hero > .sky, .hero > .clouds { overflow: hidden; }
 .sky { position: absolute; inset: 0; background: linear-gradient(180deg, #fff 0%, var(--sky-2) 45%, var(--sky) 100%); }
 .hero-copy { position: absolute; top: 12vh; text-shadow: 0 0 18px rgba(254,247,230,.95), 0 0 6px rgba(254,247,230,.9); left: 0; right: 0; text-align: center; padding: 0 24px; z-index: 3; }
 .hero-title { font-size: clamp(28.6px, 4.1667vw, 60px); color: var(--notf-forest); line-height: 1; letter-spacing: -0.035em; font-weight: 800; }
@@ -144,10 +145,10 @@ img, svg { display: block; max-width: 100%; }
 .place.roll-out { transform: translateY(-110%); opacity: 0; }
 .place.roll-in { transform: translateY(110%); opacity: 0; transition: none; }
 .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 24px; }
-.island-wrap { --iw: min(1600px, 100vw, calc((100vh - 140px) * 1.6)); position: absolute; left: 0; right: 0; margin: 0 auto; width: var(--iw); bottom: calc(var(--iw) / -12); min-width: 300px; z-index: 2; } /* large and prominent; may sit behind the buttons */
+.island-wrap { --iw: min(1600px, 100vw, calc((100vh - 110px) * 1.5)); position: absolute; left: 0; right: 0; margin: 0 auto; width: var(--iw); bottom: 0; min-width: 300px; z-index: 2; pointer-events: none; transform-origin: 50% 40%; } /* whole island visible on load */
 .island { width: 100%; height: auto; display: block; aspect-ratio: 3 / 2; object-fit: cover; }
 /* Feather the video's cloud edges into the sky; the video itself is unaltered */
-.island-wrap { -webkit-mask-image: radial-gradient(ellipse 55% 53% at 50% 52%, #000 80%, transparent 100%); mask-image: radial-gradient(ellipse 55% 53% at 50% 52%, #000 80%, transparent 100%); }
+.island-wrap { -webkit-mask-image: radial-gradient(ellipse 56% 56% at 50% 50%, #000 82%, transparent 100%); mask-image: radial-gradient(ellipse 56% 56% at 50% 50%, #000 82%, transparent 100%); }
 
 /* ---------- 2. WHAT (one section, four tabs) ---------- */
 .what { position: relative; padding: 12vh 0 120px; background: var(--sky); }
@@ -386,7 +387,7 @@ img, svg { display: block; max-width: 100%; }
   .hero-place { font-size: clamp(13px, 3.857vw, 16.7px); }
   .hero-place .nw { display: block; }
   .hero-btns .btn { padding: 0 20px; }
-      .island-wrap { bottom: 2vh; width: 150vw; left: 50%; right: auto; margin-left: -75vw; }
+  .island-wrap { bottom: 4vh; width: 100vw; left: 50%; right: auto; margin-left: -50vw; }
   .wrap { padding: 0 16px; }
   .sec { padding: 64px 0; }
   .faq { padding: 64px 0 110px; }
