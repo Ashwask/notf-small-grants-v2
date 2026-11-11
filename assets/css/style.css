@@ -144,10 +144,10 @@ img, svg { display: block; max-width: 100%; }
 .place.roll-out { transform: translateY(-110%); opacity: 0; }
 .place.roll-in { transform: translateY(110%); opacity: 0; transition: none; }
 .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 24px; }
-.island-wrap { position: absolute; left: 0; right: 0; margin: 0 auto; bottom: 0; width: min(900px, 92vw, calc((100vh - 340px) * 1.5)); min-width: 300px; z-index: 2; } /* height = space left under the text (3:2 video) */ /* no CSS transform: GSAP owns it */
+.island-wrap { --iw: min(1400px, 98vw, calc((100vh - 320px) * 1.8)); position: absolute; left: 0; right: 0; margin: 0 auto; width: var(--iw); bottom: calc(var(--iw) / -7.5); min-width: 300px; z-index: 2; } /* broader; bottom fifth fades off-screen so it clears the buttons */
 .island { width: 100%; height: auto; display: block; aspect-ratio: 3 / 2; object-fit: cover; }
 /* Feather the video's cloud edges into the sky; the video itself is unaltered */
-.island-wrap { -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 72%, transparent 100%); mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 72%, transparent 100%); }
+.island-wrap { -webkit-mask-image: radial-gradient(ellipse 52% 50% at 50% 50%, #000 66%, transparent 100%); mask-image: radial-gradient(ellipse 52% 50% at 50% 50%, #000 66%, transparent 100%); }
 
 /* ---------- 2. WHAT (one section, four tabs) ---------- */
 .what { position: relative; padding: 12vh 0 120px; background: var(--sky); }
