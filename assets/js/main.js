@@ -89,6 +89,7 @@
   var tabNames = ['about', 'fund', 'how', 'fit'];
   var tabBtns = $$('.what-tabs [role="tab"]');
   var currentTab = null;
+  var currentTabWasSet = false;
   var aboutPlayed = false;
   var whatSeen = false; // panel entrance animations wait until the section is on screen
   var fillWords = splitWords($('.fill-text'));
@@ -131,6 +132,8 @@
       b.tabIndex = on ? 0 : -1;
     });
     tabNames.forEach(function (n) { document.getElementById(n).hidden = n !== name; });
+    if (typeof placeLens === 'function') placeLens($('.what-tabs [data-tab="' + name + '"]'), changed && currentTabWasSet);
+    currentTabWasSet = true;
     if (opts.focus) $('[data-tab="' + name + '"][role="tab"]').focus();
     // Recalculate layout first (panel heights differ), then scroll, so the refresh can't cancel the scroll
     if (hasGsap && changed) ScrollTrigger.refresh();
@@ -143,7 +146,7 @@
   }
 
   tabBtns.forEach(function (b, i) {
-    b.addEventListener('click', function () { showTab(b.dataset.tab); });
+    b.addEventListener('click', function () { if (dragMoved) return; showTab(b.dataset.tab); });
     b.addEventListener('keydown', function (e) {
       var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
       if (!d) return;
@@ -151,6 +154,64 @@
       showTab(tabNames[(i + d + tabNames.length) % tabNames.length], { focus: true });
     });
   });
+  /* ---------- Glass lens on the tab bar: click, drag, or arrow keys ---------- */
+  var tabsEl = $('.what-tabs'), lens = $('.lens');
+  var dragging = false, dragMoved = false, dragStartX = 0, lensStartLeft = 0;
+  function markUnder(centerX) {
+    tabBtns.forEach(function (b) {
+      var under = centerX == null ? b.getAttribute('aria-selected') === 'true'
+        : (centerX >= b.offsetLeft && centerX < b.offsetLeft + b.offsetWidth);
+      b.classList.toggle('is-under', under);
+    });
+  }
+  function placeLens(btn, squash) {
+    if (!lens || !btn) return;
+    lens.style.left = btn.offsetLeft + 'px';
+    lens.style.width = btn.offsetWidth + 'px';
+    markUnder();
+    if (squash && animate) gsap.fromTo(lens, { scaleX: 1.12, scaleY: .88 }, { scaleX: 1, scaleY: 1, duration: .7, ease: 'elastic.out(1, .45)' });
+  }
+  function nearestTab(centerX) {
+    var best = tabBtns[0], dist = Infinity;
+    tabBtns.forEach(function (b) { var c = b.offsetLeft + b.offsetWidth / 2, d = Math.abs(c - centerX); if (d < dist) { dist = d; best = b; } });
+    return best;
+  }
+  if (lens) {
+    tabsEl.addEventListener('pointerdown', function (e) {
+      var r = lens.getBoundingClientRect();
+      if (e.clientX < r.left || e.clientX > r.right) return; // not on the lens: normal tab click
+      dragging = true; dragMoved = false; dragStartX = e.clientX; lensStartLeft = lens.offsetLeft;
+      lens.classList.add('dragging');
+      tabsEl.setPointerCapture(e.pointerId);
+    });
+    tabsEl.addEventListener('pointermove', function (e) {
+      if (!dragging) return;
+      var dx = e.clientX - dragStartX;
+      if (Math.abs(dx) > 4) dragMoved = true;
+      var min = tabBtns[0].offsetLeft, max = tabBtns[tabBtns.length - 1].offsetLeft + tabBtns[tabBtns.length - 1].offsetWidth - lens.offsetWidth;
+      var left = Math.max(min, Math.min(max, lensStartLeft + dx));
+      lens.style.left = left + 'px';
+      // stretch a little with speed, like liquid glass
+      var stretch = Math.min(.12, Math.abs(e.movementX || 0) / 120);
+      lens.style.transform = 'scaleX(' + (1 + stretch) + ') scaleY(' + (1 - stretch / 1.5) + ')';
+      markUnder(left + lens.offsetWidth / 2);
+    });
+    var endDrag = function (e) {
+      if (!dragging) return;
+      dragging = false;
+      lens.classList.remove('dragging');
+      lens.style.transform = '';
+      var target = nearestTab(lens.offsetLeft + lens.offsetWidth / 2);
+      if (dragMoved) { showTab(target.dataset.tab); target.focus({ preventScroll: true }); }
+      else { placeLens($('.what-tabs [aria-selected="true"]')); }
+      setTimeout(function () { dragMoved = false; }, 0);
+    };
+    tabsEl.addEventListener('pointerup', endDrag);
+    tabsEl.addEventListener('pointercancel', endDrag);
+    window.addEventListener('resize', function () { placeLens($('.what-tabs [aria-selected="true"]')); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { placeLens($('.what-tabs [aria-selected="true"]')); });
+  }
+
   // Any link to #about / #fund / #how / #fit (menu, footer, hero CTA) opens that tab
   $$('a[data-tab]').forEach(function (a) {
     a.addEventListener('click', function (e) { e.preventDefault(); showTab(a.dataset.tab, { scroll: true }); history.replaceState(null, '', '#' + a.dataset.tab); });
@@ -256,6 +317,21 @@
     if (animate && (state === 'fit' || state === 'nofit')) gsap.fromTo(title, { y: 10, opacity: 0 }, { y: 0, opacity: 1, duration: .4, ease: 'back.out(2)' });
   }
 
+  /* ---------- Buttons: shine follows the cursor, slight magnetic lean ---------- */
+  var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  $$('.btn').forEach(function (btn) {
+    btn.addEventListener('pointermove', function (e) {
+      var r = btn.getBoundingClientRect();
+      btn.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      btn.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      if (finePointer && !reduce) {
+        var dx = (e.clientX - (r.left + r.width / 2)) / r.width, dy = (e.clientY - (r.top + r.height / 2)) / r.height;
+        btn.style.translate = (dx * 6).toFixed(1) + 'px ' + (dy * 5).toFixed(1) + 'px';
+      }
+    });
+    btn.addEventListener('pointerleave', function () { btn.style.translate = ''; });
+  });
+
   /* ---------- FAQ: one open at a time, smooth height ---------- */
   var faqItems = $$('.faq-item');
   faqItems.forEach(function (d) {
@@ -323,7 +399,7 @@
     .add(function () { $('.loader').remove(); })
     .to(heroWords, { yPercent: 0, opacity: 1, stagger: .07, duration: .9, ease: 'power4.out' }, '-=0.45')
     .to('.hero-sub', { opacity: 1, y: 0, duration: .7 }, '-=0.6')
-    .to('.hero-copy .btn', { opacity: 1, y: 0, duration: .6, ease: 'back.out(2)' }, '-=0.5')
+    .to('.hero-copy .btn', { opacity: 1, y: 0, duration: .6, ease: 'back.out(2)', clearProps: 'transform' }, '-=0.5')
     .to('.island', { y: 0, opacity: 1, duration: 1.3, ease: 'back.out(1.2)' }, '-=1.1');
 
   /* 1. Hero: short pin. Video zooms away, statement, then stats in quick succession */

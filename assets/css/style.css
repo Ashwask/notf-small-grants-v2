@@ -1,6 +1,16 @@
 /* NoTF BLR Small Grants, v2 (scroll-story design exploration).
    Palette: sky / navy / green. All values here so it can be re-skinned to NoTF tokens. */
 :root {
+  /* NoTF brand (from notf.in main.css) for buttons and the tab lens */
+  --notf-cream: #FAF6E8;
+  --notf-cream-deep: #EFE8D2;
+  --notf-terracotta: #C45A2A;
+  --notf-terracotta-dark: #B04E24;   /* AA with white text */
+  --notf-terracotta-darker: #963F1B;
+  --notf-forest: #2F4A2C;
+  --notf-olive: #B9C98A;
+  --notf-mustard: #F5B82E;
+  --notf-charcoal: #2B2B2B;
   --sky: #D7ECF6;
   --sky-2: #E8F4FA;
   --sky-deep: #BFDDEE;
@@ -39,13 +49,19 @@ img, svg { display: block; max-width: 100%; }
 .skip-link { position: fixed; top: 0; left: 16px; transform: translateY(-120%); background: var(--navy); color: #fff; padding: 8px 16px; z-index: 300; border-radius: 0 0 8px 8px; }
 .skip-link:focus { transform: none; }
 
-/* Buttons */
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 28px; border-radius: 10px; font-weight: 600; font-size: 15px; text-decoration: none; border: 0; transition: background-color .2s ease, transform .2s var(--ease-spring), box-shadow .2s ease; }
-.btn:hover { transform: translateY(-2px); }
-.btn-green { background: var(--green); color: #fff; box-shadow: 0 6px 18px rgba(55, 134, 58, .28); }
-.btn-green:hover { background: var(--green-dark); }
-.btn-white { background: #fff; color: var(--green); box-shadow: 0 6px 18px rgba(13, 39, 89, .08); }
-.btn[aria-disabled="true"] { opacity: .55; cursor: not-allowed; transform: none; }
+/* Buttons: glossy NoTF pills. --mx/--my are set by JS so the shine follows the cursor */
+.btn { translate: 0 0; position: relative; isolation: isolate; overflow: hidden; display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 28px; border-radius: 999px; font-weight: 600; font-size: 15px; text-decoration: none; border: 0; will-change: transform; transition: background-color .25s ease, box-shadow .25s ease, transform .2s var(--ease-spring), translate .3s var(--ease-smooth); }
+.btn::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; background: radial-gradient(140px circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,.38), transparent 60%); opacity: 0; transition: opacity .25s ease; }
+.btn::after { content: ""; position: absolute; left: 8%; right: 8%; top: 2px; height: 46%; z-index: -1; border-radius: 999px; background: linear-gradient(180deg, rgba(255,255,255,.42), rgba(255,255,255,0)); pointer-events: none; }
+.btn:hover::before { opacity: 1; }
+.btn:active { transform: scale(.97); }
+.btn-green { background: var(--notf-terracotta-dark); color: #fff; box-shadow: inset 0 1px 0 rgba(255,255,255,.35), inset 0 -3px 6px rgba(0,0,0,.18), 0 8px 20px rgba(196,90,42,.32); }
+.btn-green:hover { background: var(--notf-terracotta-darker); box-shadow: inset 0 1px 0 rgba(255,255,255,.35), inset 0 -3px 6px rgba(0,0,0,.2), 0 12px 26px rgba(196,90,42,.4); }
+.btn-white { background: rgba(250,246,232,.92); color: var(--notf-forest); box-shadow: inset 0 1px 0 #fff, inset 0 -2px 5px rgba(43,43,43,.08), 0 0 0 1px rgba(47,74,44,.12), 0 8px 18px rgba(43,43,43,.1); }
+.btn-white:hover { background: var(--notf-cream); }
+.btn-white::before { background: radial-gradient(140px circle at var(--mx, 50%) var(--my, 50%), rgba(185,201,138,.45), transparent 60%); }
+.btn[aria-disabled="true"] { cursor: not-allowed; }
+.btn[aria-disabled="true"]:active { transform: none; }
 
 /* Loader */
 .loader { position: fixed; inset: 0; z-index: 500; background: var(--sky-2); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; }
@@ -139,13 +155,30 @@ img, svg { display: block; max-width: 100%; }
 .what-head { margin-bottom: 22px; }
 .what-head .eyebrow { margin-bottom: 10px; }
 .what-title { font-size: clamp(28px, 3vw, 42px); max-width: 860px; }
-/* Segmented tabs: never scroll sideways, wrap to 2x2 on phones */
-.what-tabs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; background: #fff; border-radius: 14px; padding: 6px; margin-bottom: 18px; box-shadow: 0 6px 20px rgba(13,39,89,.06); }
-.what-tabs button { border: 0; background: transparent; border-radius: 10px; min-height: 48px; padding: 8px 12px; font-family: var(--display); font-size: 17px; color: var(--blue); display: flex; align-items: center; justify-content: center; gap: 8px; transition: background-color .25s ease, color .25s ease; }
-.what-tabs button span { font-family: var(--body); font-size: 11px; font-weight: 600; opacity: .55; }
-.what-tabs button:hover { background: var(--sky-2); }
-.what-tabs button[aria-selected="true"] { background: var(--navy); color: #fff; }
-.what-tabs button[aria-selected="true"] span { opacity: .7; }
+/* Glass-lens tabs (NoTF colours): cream track, draggable glossy lens */
+.what-tabs { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); padding: 7px; margin-bottom: 8px; border-radius: 999px; background: linear-gradient(180deg, var(--notf-cream-deep), var(--notf-cream)); box-shadow: inset 0 2px 6px rgba(43,43,43,.12), inset 0 -1px 0 rgba(255,255,255,.9), 0 1px 0 rgba(255,255,255,.7); touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+.what-tabs button { position: relative; z-index: 2; border: 0; background: transparent; border-radius: 999px; min-height: 52px; padding: 8px 10px; font-family: var(--display); font-size: 17px; color: rgba(43,43,43,.45); display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; transition: color .25s ease, transform .35s var(--ease-spring); }
+.what-tabs button span { font-family: var(--body); font-size: 11px; font-weight: 600; opacity: .6; }
+.what-tabs button:hover { color: rgba(43,43,43,.75); }
+.what-tabs button[aria-selected="true"] { color: var(--notf-forest); }
+.what-tabs button.is-under { color: var(--notf-forest); transform: scale(1.05); }
+.what-tabs button:focus-visible { outline: none; }
+.what-tabs:focus-within .lens { box-shadow: inset 0 1px 1px #fff, inset 0 -3px 6px rgba(43,43,43,.08), 0 8px 18px rgba(43,43,43,.16), 0 0 0 2px rgba(245,184,46,.7); } /* keyboard focus shows on the lens */
+.lens { position: absolute; z-index: 1; top: 7px; bottom: 7px; left: 0; width: 25%; border-radius: 999px; cursor: grab; will-change: transform, width;
+  background: linear-gradient(180deg, rgba(255,255,255,.92) 0%, rgba(255,255,255,.55) 55%, rgba(250,246,232,.75) 100%);
+  -webkit-backdrop-filter: blur(4px) saturate(1.5); backdrop-filter: blur(4px) saturate(1.5);
+  box-shadow: inset 0 1px 1px #fff, inset 0 -3px 6px rgba(43,43,43,.08), 0 8px 18px rgba(43,43,43,.16), 0 2px 4px rgba(43,43,43,.08);
+  transition: left .55s var(--ease-spring), width .55s var(--ease-spring); }
+.lens.dragging { cursor: grabbing; transition: none; }
+/* iridescent rim in NoTF colours */
+.lens::before { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 2px;
+  background: conic-gradient(from 200deg, rgba(196,90,42,.55), rgba(245,184,46,.55), rgba(185,201,138,.7), rgba(255,255,255,.95), rgba(196,90,42,.45));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); }
+/* specular highlight */
+.lens::after { content: ""; position: absolute; left: 12%; right: 12%; top: 3px; height: 40%; border-radius: 999px; background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,0)); }
+.lens-hint { text-align: center; font-size: 13px; color: var(--muted); margin-bottom: 18px; }
+.lens-hint kbd { font-family: var(--body); font-size: 12px; background: #fff; border: 1px solid var(--border); border-radius: 5px; padding: 0 5px; }
+.no-anim .lens { transition: none; }
 .what-card { background: rgba(255,255,255,.55); border: 1px solid rgba(255,255,255,.8); border-radius: 24px; padding: clamp(20px, 3vw, 36px); }
 .no-anim .panel { margin-bottom: 48px; }
 
@@ -249,7 +282,7 @@ img, svg { display: block; max-width: 100%; }
 .verdict-progress span { display: block; height: 100%; width: 0; background: #fff; transition: width .4s cubic-bezier(.625,.05,0,1); }
 .verdict-title { font-family: var(--display); font-size: 26px; line-height: 1.1; }
 .verdict-text { color: rgba(255,255,255,.85); font-size: 15px; }
-.verdict .btn { align-self: flex-start; margin-top: 6px; background: #fff; color: var(--green); }
+.verdict .btn { align-self: flex-start; margin-top: 6px; background: var(--notf-cream); color: var(--notf-forest); box-shadow: inset 0 1px 0 #fff, 0 8px 18px rgba(0,0,0,.18); }
 
 /* ---------- 9. FAQ ---------- */
 .faq { padding: 10vh 0 120px; background: var(--sky); }
@@ -291,7 +324,8 @@ img, svg { display: block; max-width: 100%; }
 .footer-btns { display: flex; gap: 12px; flex-wrap: wrap; }
 .btn-soon { background: rgba(255,255,255,.08); color: #fff; border: 1.5px dashed rgba(255,255,255,.55); box-shadow: none; cursor: default; }
 .btn-soon:hover { transform: none; background: rgba(255,255,255,.08); }
-.btn-soon[aria-disabled="true"] { opacity: 1; } /* override the generic faded disabled state */
+.btn-soon[aria-disabled="true"] { opacity: 1; }
+.btn-soon::after { display: none; } /* override the generic faded disabled state */
 .cta-media { position: relative; min-height: 300px; background: var(--sky-deep); }
 .cta-media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .footer-cols { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 32px; padding: 64px 0 48px; align-items: start; }
@@ -322,8 +356,11 @@ img, svg { display: block; max-width: 100%; }
   .hero-why { display: none; }
   .wrap { padding: 0 16px; }
   .what { padding: 9vh 0 110px; }
-  .what-tabs { grid-template-columns: 1fr 1fr; }
-  .what-tabs button { font-size: 15px; justify-content: flex-start; }
+  .what-tabs { padding: 5px; }
+  .lens { top: 5px; bottom: 5px; }
+  .what-tabs button { font-size: 13px; padding: 6px 4px; min-height: 48px; line-height: 1.15; text-align: center; }
+  .what-tabs button span { display: none; }
+  .lens-hint { font-size: 12px; }
   .what-card { padding: 18px 16px; border-radius: 20px; }
   .panel-about { grid-template-columns: 1fr; gap: 24px; }
   .fund-top { grid-template-columns: 1fr; gap: 14px; }
