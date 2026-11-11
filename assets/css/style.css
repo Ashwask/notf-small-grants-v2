@@ -34,14 +34,15 @@
   --border: rgba(60, 86, 49, .14);
   --ease-spring: cubic-bezier(.34, 1.3, .64, 1);
   --ease-smooth: cubic-bezier(.22, 1, .36, 1);
-  --display: 'Bricolage Grotesque', Verdana, sans-serif;
-  --body: 'Albert Sans', Verdana, sans-serif;
+  /* Same type as www.notf.in: the system font stack, no web fonts */
+  --display: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body { font-family: var(--body); color: var(--ink); background: var(--sky); line-height: 1.55; overflow-x: clip; -webkit-font-smoothing: antialiased; }
-h1, h2, h3, h4 { font-family: var(--display); font-weight: 500; color: var(--blue); letter-spacing: -0.02em; line-height: 1.05; }
+h1, h2, h3, h4 { font-family: var(--display); font-weight: 700; color: var(--blue); letter-spacing: -0.02em; line-height: 1.1; }
 a { color: inherit; }
 button { font: inherit; cursor: pointer; }
 img, svg { display: block; max-width: 100%; }
@@ -133,9 +134,9 @@ img, svg { display: block; max-width: 100%; }
 .hero-copy { position: absolute; top: 12vh; left: 0; right: 0; text-align: center; padding: 0 24px; z-index: 3; }
 .hero-kicker { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; background: rgba(255,255,255,.7); box-shadow: 0 0 0 1px rgba(60,86,49,.1); font-size: 13px; font-weight: 600; color: var(--notf-forest); margin-bottom: 18px; }
 .hero-kicker i { color: var(--notf-terracotta); }
-.hero-title { font-size: clamp(54px, 8vw, 124px); color: var(--blue); line-height: 1; }
+.hero-title { font-size: clamp(52px, 7.6vw, 116px); color: var(--blue); line-height: 1; letter-spacing: -0.035em; font-weight: 800; }
 .hero-title .tone { color: var(--notf-terracotta); }
-.hero-place { margin-top: 18px; font-family: var(--display); font-size: clamp(20px, 2.7vw, 37.3px); line-height: 1.25; color: var(--navy); letter-spacing: -.01em; }
+.hero-place { margin-top: 18px; font-family: var(--display); font-weight: 500; font-size: clamp(20px, 2.7vw, 37.3px); line-height: 1.25; color: var(--navy); letter-spacing: -.01em; }
 .hero-place .nw { white-space: nowrap; }
 /* fixed-width slot so the rotating name never makes the line jump */
 .place-slot { display: inline-block; min-width: 6.9em; text-align: center; padding: 1px 12px; border-radius: 999px; background: var(--notf-cream); box-shadow: inset 0 0 0 1px rgba(197,86,44,.25); }
@@ -147,21 +148,23 @@ img, svg { display: block; max-width: 100%; }
 /* Feather the video's cloud edges into the sky; the video itself is unaltered */
 .island-wrap { -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 72%, transparent 100%); mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 72%, transparent 100%); }
 .statement { position: absolute; inset: 0; z-index: 4; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 24px; opacity: 0; pointer-events: none; }
-.statement-text { font-family: var(--display); font-size: clamp(30px, 4vw, 56px); line-height: 1.1; color: var(--blue); max-width: 860px; letter-spacing: -.02em; text-wrap: balance; }
+.statement-text { font-family: var(--display); font-weight: 700; font-size: clamp(30px, 4vw, 54px); line-height: 1.12; color: var(--blue); max-width: 860px; letter-spacing: -.02em; text-wrap: balance; }
 .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 220px)); justify-content: center; gap: 14px; width: 100%; margin-top: 40px; }
 .stat { background: rgba(255,255,255,.75); border-radius: 18px; padding: 18px 16px; box-shadow: 0 10px 26px rgba(44,43,50,.08); display: flex; flex-direction: column; gap: 4px; }
-.stat b { font-family: var(--display); font-size: clamp(26px, 2.6vw, 36px); color: var(--notf-forest); font-weight: 600; line-height: 1.05; }
+.stat b { font-family: var(--display); font-size: clamp(26px, 2.6vw, 34px); color: var(--notf-forest); font-weight: 700; line-height: 1.05; }
 .stat span { font-size: 14px; color: var(--ink); line-height: 1.35; }
 
 /* ---------- 2. WHAT (one section, four tabs) ---------- */
 .what { position: relative; padding: 12vh 0 120px; background: var(--sky); }
-.what-head { margin-bottom: 22px; }
+.what-head { margin-bottom: 18px; }
 .what-head .eyebrow { margin-bottom: 10px; }
-.what-title { font-size: clamp(28px, 3vw, 42px); max-width: 860px; }
+.what-title { font-size: clamp(28px, 3vw, 40px); }
 /* Glass-lens tabs (NoTF colours): cream track, draggable glossy lens */
-.what-tabs { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); padding: 7px; margin-bottom: 8px; border-radius: 999px; background: linear-gradient(180deg, var(--notf-cream-deep), var(--notf-cream)); box-shadow: inset 0 2px 6px rgba(43,43,43,.12), inset 0 -1px 0 rgba(255,255,255,.9), 0 1px 0 rgba(255,255,255,.7); touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+.what-tabs { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); padding: 7px; margin-bottom: 26px; border-radius: 999px; background: linear-gradient(180deg, var(--notf-cream-deep), var(--notf-cream)); box-shadow: inset 0 2px 6px rgba(43,43,43,.12), inset 0 -1px 0 rgba(255,255,255,.9), 0 1px 0 rgba(255,255,255,.7); touch-action: pan-y; user-select: none; -webkit-user-select: none; }
 .what-tabs button { position: relative; z-index: 2; border: 0; background: transparent; border-radius: 999px; min-height: 52px; padding: 8px 10px; font-family: var(--display); font-size: 17px; color: rgba(43,43,43,.45); display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; transition: color .25s ease, transform .35s var(--ease-spring); }
 .what-tabs button span { font-family: var(--body); font-size: 11px; font-weight: 600; opacity: .6; }
+.what-tabs button b { font-weight: 600; }
+.what-tabs .t-short { display: none; }
 .what-tabs button:hover { color: rgba(43,43,43,.75); }
 .what-tabs button[aria-selected="true"] { color: var(--notf-forest); }
 .what-tabs button.is-under { color: var(--notf-forest); transform: scale(1.05); }
@@ -179,15 +182,13 @@ img, svg { display: block; max-width: 100%; }
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); }
 /* specular highlight */
 .lens::after { content: ""; position: absolute; left: 12%; right: 12%; top: 3px; height: 40%; border-radius: 999px; background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,0)); }
-.lens-hint { text-align: center; font-size: 13px; color: var(--muted); margin-bottom: 18px; }
-.lens-hint kbd { font-family: var(--body); font-size: 12px; background: #fff; border: 1px solid var(--border); border-radius: 5px; padding: 0 5px; }
 .no-anim .lens { transition: none; }
-.what-card { background: rgba(255,255,255,.55); border: 1px solid rgba(255,255,255,.8); border-radius: 24px; padding: clamp(20px, 3vw, 36px); }
+.what-card { padding: 8px 0 0; } /* no outer frame: panels sit on the page */
 .no-anim .panel { margin-bottom: 48px; }
 
 /* About: statement + stamps beside a clean video frame, then three principle cards */
 .about-top { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(24px, 4vw, 52px); align-items: center; }
-.fill-text { font-size: clamp(24px, 2.3vw, 34px); color: var(--blue); line-height: 1.15; }
+.fill-text { font-size: clamp(22px, 2.1vw, 30px); color: var(--blue); line-height: 1.2; }
 .fill-text em { font-style: normal; color: var(--green); }
 .stamps { display: flex; gap: 10px; margin-top: 24px; }
 .stamp { width: clamp(84px, 7vw, 100px); height: auto; flex-shrink: 0; filter: drop-shadow(0 6px 14px rgba(43,43,43,.18)); }
@@ -227,7 +228,7 @@ img, svg { display: block; max-width: 100%; }
 
 /* How it works: four-step timeline, all visible */
 .how-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px 24px; margin-bottom: 30px; }
-.how-head h3 { font-size: clamp(24px, 2.3vw, 32px); color: var(--blue); }
+.how-head h3 { font-size: clamp(22px, 2.1vw, 30px); color: var(--blue); }
 .how-head p { color: var(--muted); font-size: 15px; }
 .timeline { --rail: 22px; list-style: none; position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
 /* rail behind the nodes; ::after is the terracotta fill that grows */
@@ -382,8 +383,9 @@ img, svg { display: block; max-width: 100%; }
   .lens { top: 5px; bottom: 5px; }
   .what-tabs button { font-size: 13px; padding: 6px 4px; min-height: 48px; line-height: 1.15; text-align: center; }
   .what-tabs button span { display: none; }
-  .lens-hint { font-size: 12px; }
-  .what-card { padding: 18px 16px; border-radius: 20px; }
+  .what-tabs .t-long { display: none; }
+  .what-tabs .t-short { display: inline; }
+    .what-card { padding: 18px 16px; border-radius: 20px; }
   .checks { grid-template-columns: 1fr; }
   .about-top { grid-template-columns: 1fr; gap: 20px; }
   .principles { grid-template-columns: 1fr; gap: 10px; }

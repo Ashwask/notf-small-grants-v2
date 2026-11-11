@@ -8,9 +8,6 @@
 <meta name="description" content="Small grants of ₹50,000 to ₹2,00,000 for people, collectives and organisations solving neighbourhood problems in Bengaluru.">
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" type="image/png" href="assets/img/favicon-32x32.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Albert+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
 <link rel="stylesheet" href="assets/css/style.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
@@ -94,16 +91,15 @@
     <div class="wrap">
       <div class="what-head">
         <p class="eyebrow">The program</p>
-        <h2 class="what-title">What it is, what we fund, how it works, and whether it's you.</h2>
+        <h2 class="what-title">Everything you need to know.</h2>
       </div>
       <div class="what-tabs" role="tablist" aria-label="The program">
-        <button role="tab" id="t-about" aria-controls="about" aria-selected="true" data-tab="about"><span>01</span>About</button>
-        <button role="tab" id="t-fund" aria-controls="fund" aria-selected="false" tabindex="-1" data-tab="fund"><span>02</span>What we fund</button>
-        <button role="tab" id="t-how" aria-controls="how" aria-selected="false" tabindex="-1" data-tab="how"><span>03</span>How it works</button>
-        <button role="tab" id="t-fit" aria-controls="fit" aria-selected="false" tabindex="-1" data-tab="fit"><span>04</span>Is this you?</button>
+        <button role="tab" id="t-about" aria-controls="about" aria-selected="true" data-tab="about"><span>01</span><b class="t-long">About</b><b class="t-short" aria-hidden="true">About</b></button>
+        <button role="tab" id="t-fund" aria-controls="fund" aria-selected="false" tabindex="-1" data-tab="fund"><span>02</span><b class="t-long">What we fund</b><b class="t-short" aria-hidden="true">Funding</b></button>
+        <button role="tab" id="t-how" aria-controls="how" aria-selected="false" tabindex="-1" data-tab="how"><span>03</span><b class="t-long">How it works</b><b class="t-short" aria-hidden="true">Process</b></button>
+        <button role="tab" id="t-fit" aria-controls="fit" aria-selected="false" tabindex="-1" data-tab="fit"><span>04</span><b class="t-long">Is this you?</b><b class="t-short" aria-hidden="true">Fit check</b></button>
         <span class="lens" aria-hidden="true"></span>
       </div>
-      <p class="lens-hint">Click a tab, drag the lens, or use <kbd>←</kbd> <kbd>→</kbd></p>
 
       <div class="what-card">
         <!-- About -->
@@ -131,8 +127,8 @@
         <!-- What we fund -->
         <div class="panel panel-fund" id="fund" role="tabpanel" aria-labelledby="t-fund">
           <div class="how-head">
-            <h3>What we fund</h3>
-            <p>Fixes already underway, led by the neighbourhood, that could work elsewhere too.</p>
+            <h3>Fixes led by neighbours, built to travel.</h3>
+            <p>Five themes to start from. If yours isn't here, tell us anyway.</p>
           </div>
           <ul class="themes">
             <li class="theme"><i class="fa-solid fa-tree-city" aria-hidden="true"></i><h4>Public spaces</h4><p class="theme-eg">Parks, footpaths, play areas, bus stops</p><p>Reclaim a corner, fix a footpath, light up a dark stretch, or turn a dumping spot into a place people stop and sit.</p></li>
@@ -184,7 +180,10 @@
 
         <!-- Is this you? -->
         <div class="panel panel-fit" id="fit" role="tabpanel" aria-labelledby="t-fit">
-          <h3 class="fit-title">Thirty seconds to see if your idea fits.</h3>
+          <div class="how-head">
+            <h3>Thirty seconds to see if your idea fits.</h3>
+            <p>Three questions. Nothing is saved or sent.</p>
+          </div>
           <div class="sentence">
         <span>I'm</span>
         <label class="sr" for="fitWho">Who you are</label>
