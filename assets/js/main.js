@@ -112,8 +112,11 @@
         .from('.range-item', { opacity: 0, y: 30, scale: .5, stagger: .1, duration: .45, ease: 'back.out(2)' }, '-=0.5');
     }
     if (name === 'how') {
-      gsap.from('.how-arc-scene', { xPercent: 30, opacity: 0, duration: .8, ease: 'power3.out' });
-      gsap.from('.checks > div', { y: 30, opacity: 0, stagger: .12, duration: .6, delay: .2 });
+      var tl = $('.timeline');
+      gsap.fromTo(tl, { '--fill': 0 }, { '--fill': 1, duration: 1.2, ease: 'power2.inOut' });
+      gsap.from('.tl-node', { scale: 0, stagger: .25, duration: .5, ease: 'back.out(2.4)' });
+      gsap.from('.tl-card', { y: 26, opacity: 0, stagger: .25, duration: .6, ease: 'power3.out', delay: .1 });
+      gsap.from('.checks > div', { y: 24, opacity: 0, stagger: .12, duration: .6, delay: .9 });
     }
     if (name === 'fit') {
       gsap.from('.q', { x: -20, opacity: 0, stagger: .08, duration: .5, delay: .1 });
@@ -250,42 +253,6 @@
   }
   details.textContent = themes[0].d;
   fundPills.forEach(function (p, k) { p.addEventListener('click', function () { setTheme(k); }); });
-
-  /* ---------- How it works ---------- */
-  var steps = [
-    { t: 'Fill in and submit the application form linked at the end of this page.', i: 'fa-pen-to-square', s: 'fa-file-pen', bg: 'linear-gradient(140deg, #F4EFD9, #E3D5B5)' },
-    { t: 'A short conversation and, if it helps, a visit to see the problem and your work on it.', i: 'fa-comments', s: 'fa-people-arrows', bg: 'linear-gradient(140deg, #E4F2DC, #9CCB6A)' },
-    { t: 'You hear back from us, yes or no, within about six weeks of applying.', i: 'fa-circle-check', s: 'fa-envelope-open-text', bg: 'linear-gradient(140deg, #EAF3FB, #9DB7D6)' },
-    { t: 'The grant is transferred and you get on with the fix.', i: 'fa-indian-rupee-sign', s: 'fa-hand-holding-heart', bg: 'linear-gradient(140deg, #FCEBD9, #F5B82E)' }
-  ];
-  var howIdx = -1;
-  var howTabs = $$('.how-tabs button');
-  function setStep(i) {
-    i = (i + steps.length) % steps.length;
-    if (i === howIdx) return;
-    var first = howIdx < 0;
-    howIdx = i;
-    var st = steps[i];
-    howTabs.forEach(function (b, k) { b.classList.toggle('is-active', k === i); b.setAttribute('aria-selected', String(k === i)); });
-    var apply = function () {
-      $('#howText').textContent = st.t;
-      $('#howBig').textContent = '0' + (i + 1);
-      $('#howIcon').className = 'fa-solid ' + st.i;
-      $('#howScene').style.background = st.bg;
-      $('#howScene i').className = 'fa-solid ' + st.s;
-    };
-    if (!animate || first) { apply(); return; }
-    gsap.to(['#howText', '.how-num'], { opacity: 0, y: -12, duration: .2, ease: 'power2.in', onComplete: function () {
-      apply();
-      gsap.fromTo('#howText', { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: .45, ease: 'power3.out' });
-      gsap.fromTo('.how-num', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .5, ease: 'back.out(1.6)' });
-      gsap.fromTo('#howScene i', { scale: .6, opacity: 0 }, { scale: 1, opacity: 1, duration: .6, ease: 'back.out(1.8)' });
-    } });
-  }
-  setStep(0);
-  howTabs.forEach(function (b, k) { b.addEventListener('click', function () { setStep(k); }); });
-  $('#howPrev').addEventListener('click', function () { setStep(howIdx - 1); });
-  $('#howNext').addEventListener('click', function () { setStep(howIdx + 1); });
 
   /* ---------- Fit checker ---------- */
   var answers = {};
