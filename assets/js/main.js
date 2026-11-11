@@ -109,16 +109,66 @@
       gsap.from('.gs-text', { y: 20, opacity: 0, duration: .6, delay: 1.1 });
     },
     how: function () {
-      gsap.fromTo('.timeline', { '--fill': 0 }, { '--fill': 1, duration: 1.2, ease: 'power2.inOut' });
-      gsap.from('.tl-node', { scale: 0, stagger: .25, duration: .5, ease: 'back.out(2.4)' });
-      gsap.from('.tl-card', { y: 26, opacity: 0, stagger: .25, duration: .6, ease: 'power3.out', delay: .1 });
-      gsap.from('.checks > div', { y: 24, opacity: 0, stagger: .12, duration: .6, delay: .9 });
+      gsap.from('.step-card', { y: 50, rotation: -6, opacity: 0, duration: .8, ease: 'back.out(1.5)' });
+      gsap.from('.step-list li', { x: -16, opacity: 0, stagger: .08, duration: .45, delay: .15 });
+      gsap.from('.step-arc', { xPercent: 30, opacity: 0, duration: .9, ease: 'power3.out' });
+      gsap.from('.checks > div', { y: 24, opacity: 0, stagger: .12, duration: .6, delay: .5 });
     },
     fit: function () {
       gsap.from('.q', { x: -20, opacity: 0, stagger: .08, duration: .5, delay: .1 });
       gsap.from('.verdict', { scale: .95, opacity: 0, duration: .5, delay: .2 });
     }
   };
+
+  /* ---------- How it works stepper ---------- */
+  var steps = [
+    { t: 'Fill in the short application form linked at the end of this page.', tag: 'Any time', i: 'fa-pen-to-square', s: 'fa-file-pen', bg: 'linear-gradient(140deg, #FFEFD6, #F6D9B5)' },
+    { t: 'A short conversation and, if it helps, a visit to see the problem and your work on it.', tag: 'A call or a visit', i: 'fa-comments', s: 'fa-people-arrows', bg: 'linear-gradient(140deg, #EEF2DC, #B5C37C)' },
+    { t: 'You hear back from us, yes or no, within about six weeks of applying.', tag: 'About 6 weeks', i: 'fa-circle-check', s: 'fa-envelope-open-text', bg: 'linear-gradient(140deg, #FFF3D6, #FAB52A)' },
+    { t: 'The grant is transferred and you get on with the fix.', tag: 'Up to 6 months to deliver', i: 'fa-indian-rupee-sign', s: 'fa-hand-holding-heart', bg: 'linear-gradient(140deg, #F8E2D6, #D2865D)' }
+  ];
+  var stepIdx = 0, stepBtns = $$('.step-list button');
+  function setStep(i, focus) {
+    i = (i + steps.length) % steps.length;
+    if (i === stepIdx && !focus) return;
+    stepIdx = i; var st = steps[i];
+    stepBtns.forEach(function (b, k) { var on = k === i; b.classList.toggle('is-active', on); b.setAttribute('aria-selected', String(on)); b.tabIndex = on ? 0 : -1; });
+    if (focus) stepBtns[i].focus();
+    var apply = function () {
+      $('#stepText').textContent = st.t; $('#stepTag').textContent = st.tag;
+      $('#stepNum').textContent = '0' + (i + 1); $('#stepIcon').className = 'fa-solid ' + st.i;
+      $('#stepScene').style.background = st.bg; $('#stepSceneIcon').className = 'fa-solid ' + st.s;
+      $('#stepCount').textContent = (i + 1) + ' / ' + steps.length;
+    };
+    if (!animate) { apply(); return; }
+    gsap.to(['#stepText', '#stepTag', '.step-card'], { opacity: 0, y: -10, duration: .18, ease: 'power2.in', onComplete: function () {
+      apply();
+      gsap.fromTo(['#stepText', '#stepTag'], { opacity: 0, y: 14 }, { opacity: 1, y: 0, stagger: .05, duration: .45, ease: 'power3.out' });
+      gsap.fromTo('.step-card', { opacity: 0, y: 26, rotation: -4 }, { opacity: 1, y: 0, rotation: 0, duration: .6, ease: 'back.out(1.6)' });
+      gsap.fromTo('#stepSceneIcon', { scale: .6, opacity: 0 }, { scale: 1, opacity: 1, duration: .6, ease: 'back.out(1.8)' });
+    } });
+  }
+  stepBtns.forEach(function (b, k) {
+    b.addEventListener('click', function () { stopAuto(); setStep(k); });
+    b.addEventListener('keydown', function (e) {
+      var d = e.key === 'ArrowDown' || e.key === 'ArrowRight' ? 1 : e.key === 'ArrowUp' || e.key === 'ArrowLeft' ? -1 : 0;
+      if (d) { e.preventDefault(); stopAuto(); setStep(stepIdx + d, true); }
+    });
+  });
+  $('#stepPrev').addEventListener('click', function () { stopAuto(); setStep(stepIdx - 1); });
+  $('#stepNext').addEventListener('click', function () { stopAuto(); setStep(stepIdx + 1); });
+  // Auto-advance every 4.5s while the section is on screen, until someone interacts
+  var autoTimer = null, autoStopped = false;
+  function stopAuto() { autoStopped = true; clearInterval(autoTimer); autoTimer = null; }
+  if (!reduce && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (autoStopped) return;
+        if (e.isIntersecting && !autoTimer) autoTimer = setInterval(function () { setStep(stepIdx + 1); }, 4500);
+        if (!e.isIntersecting && autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+      });
+    }, { threshold: .5 }).observe($('.stepper'));
+  }
 
   /* ---------- Fit checker ---------- */
   var answers = {};

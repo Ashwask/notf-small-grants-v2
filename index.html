@@ -130,24 +130,21 @@
             <h3>Rolling call. Six weeks, give or take.</h3>
             <p>Applications are reviewed as they come in. No deadline to chase.</p>
           </div>
-          <ol class="timeline">
-            <li class="tl-step">
-              <span class="tl-node">1</span>
-              <div class="tl-card"><i class="fa-solid fa-pen-to-square" aria-hidden="true"></i><h4>You apply</h4><p>Fill in the short application form linked at the end of this page.</p><span class="tl-tag">Any time</span></div>
-            </li>
-            <li class="tl-step">
-              <span class="tl-node">2</span>
-              <div class="tl-card"><i class="fa-solid fa-comments" aria-hidden="true"></i><h4>We get to know you</h4><p>A short conversation and, if it helps, a visit to see the problem.</p><span class="tl-tag">A call or a visit</span></div>
-            </li>
-            <li class="tl-step">
-              <span class="tl-node">3</span>
-              <div class="tl-card"><i class="fa-solid fa-circle-check" aria-hidden="true"></i><h4>The decision</h4><p>You hear back from us, yes or no.</p><span class="tl-tag">About 6 weeks</span></div>
-            </li>
-            <li class="tl-step">
-              <span class="tl-node">4</span>
-              <div class="tl-card"><i class="fa-solid fa-hand-holding-heart" aria-hidden="true"></i><h4>Funds arrive</h4><p>The grant is transferred and you get on with the fix.</p><span class="tl-tag">Up to 6 months to deliver</span></div>
-            </li>
-          </ol>
+          <div class="stepper">
+            <div class="step-card" aria-hidden="true"><span id="stepNum">01</span><i class="fa-solid fa-pen-to-square" id="stepIcon"></i></div>
+            <div class="step-mid">
+              <ol class="step-list" role="tablist" aria-label="Steps">
+                <li><button role="tab" aria-selected="true" class="is-active" data-i="0">You apply</button></li>
+                <li><button role="tab" aria-selected="false" tabindex="-1" data-i="1">We get to know you</button></li>
+                <li><button role="tab" aria-selected="false" tabindex="-1" data-i="2">The decision</button></li>
+                <li><button role="tab" aria-selected="false" tabindex="-1" data-i="3">Funds arrive</button></li>
+              </ol>
+              <p class="step-text" id="stepText" aria-live="polite">Fill in the short application form linked at the end of this page.</p>
+              <p class="step-tag" id="stepTag">Any time</p>
+              <div class="step-nav"><button class="round-btn" id="stepPrev" aria-label="Previous step"><i class="fa-solid fa-arrow-left"></i></button><button class="round-btn round-btn-dark" id="stepNext" aria-label="Next step"><i class="fa-solid fa-arrow-right"></i></button><span class="step-count" id="stepCount">1 / 4</span></div>
+            </div>
+            <div class="step-arc" aria-hidden="true"><div class="step-scene" id="stepScene"><i class="fa-solid fa-file-pen" id="stepSceneIcon"></i></div></div>
+          </div>
           <div class="checks">
             <div><h4><i class="fa-solid fa-user-group" aria-hidden="true"></i> Who it's for</h4><ul><li>Individuals, collectives and organisations</li><li>Based in Bengaluru</li><li>Tackling a specific neighbourhood problem</li><li>With an idea that could travel</li></ul></div>
             <div><h4><i class="fa-solid fa-flag-checkered" aria-hidden="true"></i> What we ask at the end</h4><ul><li>A story or playbook of your fix</li><li>A fund utilisation certificate</li><li>That's it. No interim reports.</li></ul></div>
