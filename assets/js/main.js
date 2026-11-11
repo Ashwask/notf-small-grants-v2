@@ -97,11 +97,6 @@
   /* ---------- Section entrances (About / What we fund / How it works / Is this you?) ---------- */
   var fillWords = splitWords($('.fill-text'));
   var entrances = {
-    about: function () {
-      gsap.fromTo(fillWords, { color: 'rgba(16,54,87,.16)' }, { color: function (i, el) { return el.closest('em') ? '#3C5631' : '#2C2B32'; }, stagger: .04, duration: .4, ease: 'none' });
-      gsap.from('.principle', { y: 24, opacity: 0, stagger: .1, duration: .55, ease: 'power3.out', delay: .3 });
-      gsap.from('.fact', { y: 20, opacity: 0, stagger: .08, duration: .5, ease: 'back.out(1.6)', delay: .4 });
-    },
     how: function () {
       gsap.from('.step-card', { y: 50, rotation: -6, opacity: 0, duration: .8, ease: 'back.out(1.5)' });
       gsap.from('.step-list li', { x: -16, opacity: 0, stagger: .08, duration: .45, delay: .15 });
@@ -131,7 +126,7 @@
     var apply = function () {
       $('#stepText').textContent = st.t; $('#stepTag').textContent = st.tag;
       $('#stepNum').textContent = '0' + (i + 1); $('#stepIcon').className = 'fa-solid ' + st.i;
-      $('#stepScene').style.background = st.bg; $('#stepSceneIcon').className = 'fa-solid ' + st.s;
+      $('#stepScene').style.background = st.bg;
       $('#stepCount').textContent = (i + 1) + ' / ' + steps.length;
     };
     if (!animate) { apply(); return; }
@@ -139,7 +134,6 @@
       apply();
       gsap.fromTo(['#stepText', '#stepTag'], { opacity: 0, y: 14 }, { opacity: 1, y: 0, stagger: .05, duration: .45, ease: 'power3.out' });
       gsap.fromTo('.step-card', { opacity: 0, y: 26, rotation: -4 }, { opacity: 1, y: 0, rotation: 0, duration: .6, ease: 'back.out(1.6)' });
-      gsap.fromTo('#stepSceneIcon', { scale: .6, opacity: 0 }, { scale: 1, opacity: 1, duration: .6, ease: 'back.out(1.8)' });
     } });
   }
   stepBtns.forEach(function (b, k) {
@@ -279,6 +273,23 @@
   gsap.timeline({ scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .6 } })
     .to('.hero-copy', { y: -80, opacity: 0, ease: 'none' }, 0)
     .to('.island-wrap', { scale: 1.15, yPercent: 8, opacity: .2, ease: 'none' }, 0);
+
+  /* About: scrubbed with the scroll. Heading rises word by word, lead fills in,
+     facts pop one by one, video frame grows into place, principles rise in turn. */
+  var aboutWords = splitWords($('.about-title'));
+  function aboutTimeline(end) {
+    return gsap.timeline({ scrollTrigger: { trigger: '#about', start: 'top 75%', end: end, scrub: 1 } })
+      .from('#about .sec-eyebrow', { y: 20, opacity: 0, duration: .3 })
+      .from(aboutWords, { yPercent: 80, opacity: 0, stagger: .06, duration: .4, ease: 'power3.out' }, .1)
+      .to(fillWords, { color: function (i, el) { return el.closest('em') ? '#3C5631' : '#2C2B32'; }, stagger: .03, duration: .3, ease: 'none' }, .5)
+      .from('.about-frame', { scale: .82, opacity: 0, rotation: 2, duration: 1, ease: 'power2.out' }, .2)
+      .from('.fact', { y: 40, opacity: 0, scale: .7, stagger: .18, duration: .5, ease: 'back.out(2.2)' }, .9)
+      .from('.principle', { y: 60, opacity: 0, stagger: .2, duration: .6, ease: 'back.out(1.6)' }, 1.5);
+  }
+  // desktop: finished as the section reaches the top; phones (tall stack): finished near its bottom
+  var aboutMM = gsap.matchMedia();
+  aboutMM.add('(min-width: 901px)', function () { aboutTimeline('top 10%'); });
+  aboutMM.add('(max-width: 900px)', function () { aboutTimeline('bottom 95%'); });
 
   /* Grant size: scrubbed with the scroll, like v1. Line draws, amounts fade in,
      each step pops up in turn (bouncy), then the description. Reverses on scroll up. */
