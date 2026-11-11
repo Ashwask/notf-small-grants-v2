@@ -68,50 +68,7 @@
     </div>
 
     <div class="island-wrap">
-      <svg class="island" viewBox="0 0 800 520" role="img" aria-label="Illustration: a Bengaluru neighbourhood on a floating island">
-        <defs>
-          <linearGradient id="gGrass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9CCB6A"/><stop offset="1" stop-color="#6FA94A"/></linearGradient>
-          <linearGradient id="gEarth" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B9774A"/><stop offset="1" stop-color="#7A4A2C"/></linearGradient>
-          <linearGradient id="gWater" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8FD0F0"/><stop offset="1" stop-color="#4E9BCB"/></linearGradient>
-        </defs>
-        <!-- earth underside -->
-        <path d="M110 300 L400 450 L690 300 L640 380 L520 470 L420 515 L330 480 L210 420 Z" fill="url(#gEarth)"/>
-        <path d="M210 420 L330 480 L420 515 L400 450 Z" fill="#6A3F25" opacity=".55"/>
-        <!-- grass top (isometric diamond) -->
-        <path d="M110 300 L400 150 L690 300 L400 450 Z" fill="url(#gGrass)"/>
-        <path d="M110 300 L400 450 L400 462 L110 312 Z" fill="#5E8F3D"/>
-        <path d="M400 450 L690 300 L690 312 L400 462 Z" fill="#4F7D33"/>
-        <!-- lane -->
-        <path d="M180 300 C 300 330, 330 260, 430 290 S 600 330, 640 300" stroke="#F4ECD8" stroke-width="26" fill="none" stroke-linecap="round"/>
-        <path d="M180 300 C 300 330, 330 260, 430 290 S 600 330, 640 300" stroke="#E2D6BA" stroke-width="2" stroke-dasharray="10 12" fill="none"/>
-        <!-- lake / rain garden -->
-        <ellipse cx="520" cy="360" rx="70" ry="30" fill="url(#gWater)"/>
-        <ellipse cx="505" cy="353" rx="22" ry="6" fill="#fff" opacity=".5"/>
-        <!-- house 1 -->
-        <g class="bob-a"><path d="M250 250 l50 -26 l50 26 l0 44 l-50 26 l-50 -26 z" fill="#FAF6E8"/><path d="M300 276 l50 -26 l0 44 l-50 26 z" fill="#E7DFC8"/><path d="M244 252 l56 -50 l56 50 l-56 28 z" fill="#C45A2A"/><path d="M300 202 l56 50 l-6 3 l-50 -45 z" fill="#963F1B"/><rect x="268" y="268" width="14" height="22" fill="#2F4A2C"/><rect x="315" y="270" width="16" height="14" fill="#8FD0F0"/></g>
-        <!-- house 2 -->
-        <g class="bob-b"><path d="M380 200 l40 -20 l40 20 l0 36 l-40 20 l-40 -20 z" fill="#F5B82E"/><path d="M420 220 l40 -20 l0 36 l-40 20 z" fill="#DDA629"/><path d="M376 202 l44 -22 l44 22 l-44 22 z" fill="#3F5F7A"/><rect x="392" y="216" width="12" height="12" fill="#FAF6E8"/></g>
-        <!-- water tank -->
-        <g><rect x="470" y="210" width="6" height="40" fill="#7A7A7A"/><rect x="500" y="210" width="6" height="40" fill="#5A5A5A"/><ellipse cx="488" cy="210" rx="26" ry="10" fill="#3F5F7A"/><rect x="462" y="186" width="52" height="24" fill="#4E7391"/><ellipse cx="488" cy="186" rx="26" ry="10" fill="#6A8FAD"/></g>
-        <!-- trees -->
-        <g class="sway"><rect x="196" y="250" width="6" height="30" fill="#6A3F25"/><circle cx="199" cy="240" r="22" fill="#2F4A2C"/><circle cx="188" cy="232" r="12" fill="#3E6139"/></g>
-        <g class="sway"><rect x="586" y="250" width="6" height="28" fill="#6A3F25"/><circle cx="589" cy="236" r="24" fill="#C8483A"/><circle cx="600" cy="228" r="12" fill="#E06A4E"/></g>
-        <g class="sway"><rect x="356" y="330" width="5" height="22" fill="#6A3F25"/><circle cx="358" cy="322" r="16" fill="#3E6139"/></g>
-        <g class="sway"><rect x="636" y="320" width="5" height="22" fill="#6A3F25"/><circle cx="638" cy="312" r="15" fill="#2F4A2C"/></g>
-        <!-- bench + compost bins -->
-        <rect x="420" y="330" width="40" height="6" rx="2" fill="#8A5A3A"/><rect x="424" y="336" width="4" height="10" fill="#5A3A22"/><rect x="452" y="336" width="4" height="10" fill="#5A3A22"/>
-        <rect x="228" y="330" width="18" height="20" rx="3" fill="#37863A"/><rect x="250" y="330" width="18" height="20" rx="3" fill="#3F5F7A"/><rect x="272" y="330" width="18" height="20" rx="3" fill="#C45A2A"/>
-        <!-- people -->
-        <g class="walk"><circle cx="300" cy="300" r="5" fill="#2B2B2B"/><rect x="296" y="305" width="8" height="14" rx="3" fill="#C45A2A"/></g>
-        <g class="walk-2"><circle cx="560" cy="300" r="5" fill="#2B2B2B"/><rect x="556" y="305" width="8" height="14" rx="3" fill="#F5B82E"/></g>
-        <circle cx="440" cy="322" r="4.5" fill="#2B2B2B"/><rect x="436" y="326" width="8" height="10" rx="3" fill="#3F5F7A"/>
-        <!-- bunting -->
-        <path d="M250 200 Q 330 230 400 196" stroke="#2B2B2B" stroke-width="1.2" fill="none"/>
-        <path d="M268 206 l6 12 l6 -10 z M292 214 l6 12 l6 -10 z M318 218 l6 12 l6 -10 z M346 216 l6 12 l6 -10 z M372 208 l6 12 l6 -10 z" fill="#F5B82E"/>
-        <!-- floating sign -->
-        <g class="bob-a"><rect x="610" y="150" width="120" height="44" rx="22" fill="#fff"/><text x="670" y="178" text-anchor="middle" font-family="Bricolage Grotesque, sans-serif" font-size="17" font-weight="600" fill="#214895">₹50K to 2L</text></g>
-        <g class="bob-b"><rect x="70" y="190" width="104" height="40" rx="20" fill="#fff"/><text x="122" y="216" text-anchor="middle" font-family="Bricolage Grotesque, sans-serif" font-size="16" font-weight="600" fill="#37863A">6 months</text></g>
-      </svg>
+      <video class="island" src="assets/media/hero-island.mp4" poster="assets/media/hero-island-poster.jpg" autoplay muted loop playsinline preload="auto" aria-label="Animation: an illustrated Bengaluru neighbourhood floating above the clouds"></video>
     </div>
 
     <div class="statement" aria-hidden="true">

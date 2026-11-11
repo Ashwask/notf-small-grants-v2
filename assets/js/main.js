@@ -41,6 +41,19 @@
     return $$('.w', el);
   }
 
+  /* ---------- Hero video: always playing, never a still ---------- */
+  var heroVideo = $('.island');
+  if (heroVideo) {
+    heroVideo.muted = true; // required for autoplay on iOS/Chrome
+    var playVideo = function () { var p = heroVideo.play(); if (p && p.catch) p.catch(function () {}); };
+    playVideo();
+    heroVideo.addEventListener('canplay', playVideo);
+    // Some mobile browsers block autoplay until the first touch; start it then
+    ['touchstart', 'click', 'scroll'].forEach(function (ev) { window.addEventListener(ev, playVideo, { once: true, passive: true }); });
+    // Resume if the tab was hidden and came back
+    document.addEventListener('visibilitychange', function () { if (!document.hidden) playVideo(); });
+  }
+
   /* ---------- Rotating neighbourhood ---------- */
   var places = ['Yelahanka', 'Jayanagar', 'Whitefield', 'Malleswaram', 'HSR Layout', 'Frazer Town', 'Basavanagudi', 'Hebbal'];
   var placeEl = $('#place'), pi = 0;
