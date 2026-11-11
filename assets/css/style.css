@@ -90,6 +90,12 @@ img, svg { display: block; max-width: 100%; }
 .topbar.scrolled { background: rgba(254, 247, 230, .86); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
 .topbar.scrolled.on-dark { background: rgba(14, 26, 22, .6); }
 
+/* Floating apply badge (animated SVG), bottom left */
+.apply-badge { position: fixed; left: 20px; bottom: 14px; z-index: 215; display: block; width: 190px; filter: drop-shadow(0 8px 18px rgba(44,43,50,.16)); transition: transform .25s var(--ease-spring); }
+.apply-badge img { display: block; width: 100%; height: auto; }
+.apply-badge:hover { transform: translateY(-3px) scale(1.03); }
+.apply-badge:focus-visible { outline: 3px solid var(--notf-mustard); outline-offset: 4px; border-radius: 40px; }
+
 /* Bottom nav pill */
 .navpill { position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 220; display: flex; flex-direction: column; align-items: stretch; }
 .navpill-bar { display: flex; align-items: center; gap: 22px; background: var(--dark); color: #fff; border-radius: 12px; padding: 6px 6px 6px 20px; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
@@ -377,6 +383,7 @@ img, svg { display: block; max-width: 100%; }
 }
 @media (max-width: 900px) {
   .topbar { padding: 10px 16px; }
+  .apply-badge { left: 10px; bottom: 80px; width: 132px; } /* sits above the centred menu pill on phones */
   .brand img { height: 44px; }
   .brand span { display: none; }
   .hero-copy { top: 10vh; }
