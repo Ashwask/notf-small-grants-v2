@@ -132,9 +132,9 @@ img, svg { display: block; max-width: 100%; }
 .hero { position: relative; height: 100vh; min-height: 640px; overflow: hidden; }
 .sky { position: absolute; inset: 0; background: linear-gradient(180deg, #fff 0%, var(--sky-2) 45%, var(--sky) 100%); }
 .hero-copy { position: absolute; top: 14vh; left: 0; right: 0; text-align: center; padding: 0 24px; z-index: 3; }
-.hero-title { font-size: clamp(52px, 7.6vw, 116px); color: var(--notf-forest); line-height: 1; letter-spacing: -0.035em; font-weight: 800; }
+.hero-title { font-size: clamp(28.6px, 4.1667vw, 60px); color: var(--notf-forest); line-height: 1; letter-spacing: -0.035em; font-weight: 800; }
 .hero-title .tone { color: var(--notf-olive); }
-.hero-place { margin-top: 18px; font-family: var(--display); font-weight: 500; font-size: clamp(20px, 2.7vw, 37.3px); line-height: 1.25; color: var(--navy); letter-spacing: -.01em; }
+.hero-place { margin-top: 18px; font-family: var(--display); font-weight: 500; font-size: clamp(15px, 1.9444vw, 28px); line-height: 1.25; color: var(--navy); letter-spacing: -.01em; }
 .hero-place .nw { white-space: nowrap; }
 /* fixed-width slot so the rotating name never makes the line jump */
 .place-slot { display: inline-block; overflow: hidden; vertical-align: bottom; min-width: 6.9em; text-align: center; padding: 1px 12px; border-radius: 999px; background: var(--notf-cream); box-shadow: inset 0 0 0 1px rgba(197,86,44,.25); }
@@ -142,7 +142,7 @@ img, svg { display: block; max-width: 100%; }
 .place.roll-out { transform: translateY(-110%); opacity: 0; }
 .place.roll-in { transform: translateY(110%); opacity: 0; transition: none; }
 .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 24px; }
-.island-wrap { position: absolute; left: 0; right: 0; margin: 0 auto; bottom: 0; width: min(820px, 92vw, calc((100vh - 400px) * 1.5)); min-width: 300px; z-index: 2; } /* height = space left under the text (3:2 video) */ /* no CSS transform: GSAP owns it */
+.island-wrap { position: absolute; left: 0; right: 0; margin: 0 auto; bottom: 0; width: min(900px, 92vw, calc((100vh - 340px) * 1.5)); min-width: 300px; z-index: 2; } /* height = space left under the text (3:2 video) */ /* no CSS transform: GSAP owns it */
 .island { width: 100%; height: auto; display: block; aspect-ratio: 3 / 2; object-fit: cover; }
 /* Feather the video's cloud edges into the sky; the video itself is unaltered */
 .island-wrap { -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 72%, transparent 100%); mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 72%, transparent 100%); }
@@ -371,7 +371,7 @@ img, svg { display: block; max-width: 100%; }
   .brand img { height: 44px; }
   .brand span { display: none; }
   .hero-copy { top: 10vh; }
-  .hero-place { font-size: clamp(20px, 6vw, 26px); }
+  .hero-place { font-size: clamp(15px, 4.5vw, 19.5px); }
   .hero-place .nw { display: block; }
   .hero-btns .btn { padding: 0 20px; }
   .stats { grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 26px; }
