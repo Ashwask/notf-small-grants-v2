@@ -134,7 +134,7 @@ img, svg { display: block; max-width: 100%; }
 .hero-copy { position: absolute; top: 14vh; left: 0; right: 0; text-align: center; padding: 0 24px; z-index: 3; }
 .hero-title { font-size: clamp(28.6px, 4.1667vw, 60px); color: var(--notf-forest); line-height: 1; letter-spacing: -0.035em; font-weight: 800; }
 .hero-title .tone { color: var(--notf-olive); }
-.hero-place { margin-top: 18px; font-family: var(--display); font-weight: 500; font-size: clamp(15px, 1.9444vw, 28px); line-height: 1.25; color: var(--navy); letter-spacing: -.01em; }
+.hero-place { margin-top: 18px; font-family: var(--display); font-weight: 500; font-size: clamp(13px, 1.6667vw, 24px); line-height: 1.25; color: var(--navy); letter-spacing: -.01em; }
 .hero-place .nw { white-space: nowrap; }
 /* fixed-width slot so the rotating name never makes the line jump */
 .place-slot { display: inline-block; overflow: hidden; vertical-align: bottom; min-width: 6.9em; text-align: center; padding: 1px 12px; border-radius: 999px; background: var(--notf-cream); box-shadow: inset 0 0 0 1px rgba(197,86,44,.25); }
@@ -371,7 +371,7 @@ img, svg { display: block; max-width: 100%; }
   .brand img { height: 44px; }
   .brand span { display: none; }
   .hero-copy { top: 10vh; }
-  .hero-place { font-size: clamp(15px, 4.5vw, 19.5px); }
+  .hero-place { font-size: clamp(13px, 3.857vw, 16.7px); }
   .hero-place .nw { display: block; }
   .hero-btns .btn { padding: 0 20px; }
   .stats { grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 26px; }
