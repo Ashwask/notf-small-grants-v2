@@ -41,18 +41,14 @@
     return $$('.w', el);
   }
 
-  /* ---------- Hero video: always playing, never a still ---------- */
-  var heroVideo = $('.island');
-  if (heroVideo) {
-    heroVideo.muted = true; // required for autoplay on iOS/Chrome
-    var playVideo = function () { var p = heroVideo.play(); if (p && p.catch) p.catch(function () {}); };
-    playVideo();
-    heroVideo.addEventListener('canplay', playVideo);
-    // Some mobile browsers block autoplay until the first touch; start it then
-    ['touchstart', 'click', 'scroll'].forEach(function (ev) { window.addEventListener(ev, playVideo, { once: true, passive: true }); });
-    // Resume if the tab was hidden and came back
-    document.addEventListener('visibilitychange', function () { if (!document.hidden) playVideo(); });
-  }
+  /* ---------- Looping videos (hero + about panel): always playing, never a still ---------- */
+  var loopVideos = $$('video.js-loop');
+  function playAll() { loopVideos.forEach(function (v) { v.muted = true; var p = v.play(); if (p && p.catch) p.catch(function () {}); }); }
+  loopVideos.forEach(function (v) { v.muted = true; v.addEventListener('canplay', playAll); v.addEventListener('pause', function () { if (!document.hidden) playAll(); }); });
+  playAll();
+  // Some mobile browsers block autoplay until the first touch; start them then
+  ['touchstart', 'click', 'scroll'].forEach(function (ev) { window.addEventListener(ev, playAll, { once: true, passive: true }); });
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) playAll(); });
 
   /* ---------- Rotating neighbourhood ---------- */
   var places = ['Yelahanka', 'Jayanagar', 'Whitefield', 'Malleswaram', 'HSR Layout', 'Frazer Town', 'Basavanagudi', 'Hebbal'];
