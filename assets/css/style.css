@@ -185,6 +185,15 @@ img, svg { display: block; max-width: 100%; }
 .what-card { padding: 8px 0 0; } /* no outer frame: panels sit on the page */
 .no-anim .panel { margin-bottom: 48px; }
 
+/* ---------- Content sections (About / What we fund / How it works + Is this you?) ---------- */
+.sec { position: relative; padding: 96px 0; background: var(--sky); }
+.sec-fund { background: var(--notf-cream-light); }
+.sec-eyebrow { margin-bottom: 14px; color: var(--notf-terracotta); }
+.sec .how-head { margin-bottom: 26px; }
+.fit-block { margin-top: 48px; padding: clamp(20px, 3vw, 36px); border-radius: 26px; background: var(--notf-cream-deep); box-shadow: inset 0 0 0 1px rgba(60,86,49,.08); scroll-margin-top: 80px; }
+.fit-block .how-head { margin-bottom: 18px; }
+.sec, .faq { scroll-margin-top: 0; }
+
 /* About: statement + stamps beside a clean video frame, then three principle cards */
 .about-top { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(24px, 4vw, 52px); align-items: center; }
 .fill-text { font-size: clamp(22px, 2.1vw, 30px); color: var(--blue); line-height: 1.2; }
@@ -304,7 +313,7 @@ img, svg { display: block; max-width: 100%; }
 .verdict .btn { align-self: flex-start; margin-top: 6px; background: var(--notf-cream); color: var(--notf-forest); box-shadow: inset 0 1px 0 #fff, 0 8px 18px rgba(0,0,0,.18); }
 
 /* ---------- 9. FAQ ---------- */
-.faq { padding: 10vh 0 120px; background: var(--sky); }
+.faq { padding: 96px 0 120px; background: var(--notf-cream-light); }
 .faq-wrap { max-width: 880px; }
 .faq-head { text-align: center; margin-bottom: 26px; }
 .faq-head .eyebrow { margin-bottom: 10px; }
@@ -378,7 +387,9 @@ img, svg { display: block; max-width: 100%; }
   .stat { padding: 14px 12px; }
   .island-wrap { bottom: 9vh; width: 108vw; left: 50%; right: auto; margin-left: -54vw; }
   .wrap { padding: 0 16px; }
-  .what { padding: 9vh 0 110px; }
+  .sec { padding: 64px 0; }
+  .faq { padding: 64px 0 110px; }
+  .fit-block { margin-top: 32px; padding: 18px 14px; border-radius: 20px; }
   .what-tabs { padding: 5px; }
   .lens { top: 5px; bottom: 5px; }
   .what-tabs button { font-size: 13px; padding: 6px 4px; min-height: 48px; line-height: 1.15; text-align: center; }

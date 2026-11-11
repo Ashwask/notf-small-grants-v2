@@ -94,141 +94,30 @@
     } });
   }
 
-  /* ---------- WHAT: four tabs ---------- */
-  var tabNames = ['about', 'fund', 'how', 'fit'];
-  var tabBtns = $$('.what-tabs [role="tab"]');
-  var currentTab = null;
-  var currentTabWasSet = false;
-  var aboutPlayed = false;
-  var whatSeen = false; // panel entrance animations wait until the section is on screen
+  /* ---------- Section entrances (About / What we fund / How it works / Is this you?) ---------- */
   var fillWords = splitWords($('.fill-text'));
-
-  function onPanelShown(name) {
-    if (!animate || !whatSeen) return;
-    var panel = document.getElementById(name);
-    gsap.fromTo(panel, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: .55, ease: 'power3.out' });
-    if (name === 'about' && !aboutPlayed) {
-      aboutPlayed = true;
+  var entrances = {
+    about: function () {
       gsap.fromTo(fillWords, { color: 'rgba(16,54,87,.16)' }, { color: function (i, el) { return el.closest('em') ? '#3C5631' : '#103657'; }, stagger: .04, duration: .4, ease: 'none' });
       gsap.from('.principle', { y: 24, opacity: 0, stagger: .1, duration: .55, ease: 'power3.out', delay: .3 });
       gsap.from('.stamp', { scale: 0, rotation: -45, opacity: 0, stagger: .12, duration: .7, ease: 'back.out(2.2)', delay: .5 });
-    }
-    if (name === 'fund') {
+    },
+    fund: function () {
       gsap.from('.theme', { y: 24, opacity: 0, stagger: .07, duration: .55, ease: 'power3.out' });
       gsap.from('.size', { y: 20, opacity: 0, duration: .55, delay: .35 });
       gsap.fromTo('.size-fill', { scaleX: 0 }, { scaleX: 1, duration: 1.1, delay: .5, ease: 'power2.inOut' });
-    }
-    if (name === 'how') {
-      var tl = $('.timeline');
-      gsap.fromTo(tl, { '--fill': 0 }, { '--fill': 1, duration: 1.2, ease: 'power2.inOut' });
+    },
+    how: function () {
+      gsap.fromTo('.timeline', { '--fill': 0 }, { '--fill': 1, duration: 1.2, ease: 'power2.inOut' });
       gsap.from('.tl-node', { scale: 0, stagger: .25, duration: .5, ease: 'back.out(2.4)' });
       gsap.from('.tl-card', { y: 26, opacity: 0, stagger: .25, duration: .6, ease: 'power3.out', delay: .1 });
       gsap.from('.checks > div', { y: 24, opacity: 0, stagger: .12, duration: .6, delay: .9 });
-    }
-    if (name === 'fit') {
+    },
+    fit: function () {
       gsap.from('.q', { x: -20, opacity: 0, stagger: .08, duration: .5, delay: .1 });
       gsap.from('.verdict', { scale: .95, opacity: 0, duration: .5, delay: .2 });
     }
-  }
-
-  function showTab(name, opts) {
-    opts = opts || {};
-    if (tabNames.indexOf(name) < 0) return;
-    var changed = name !== currentTab;
-    currentTab = name;
-    tabBtns.forEach(function (b, i) {
-      var on = b.dataset.tab === name;
-      b.setAttribute('aria-selected', String(on));
-      b.tabIndex = on ? 0 : -1;
-    });
-    tabNames.forEach(function (n) { document.getElementById(n).hidden = n !== name; });
-    if (typeof placeLens === 'function') placeLens($('.what-tabs [data-tab="' + name + '"]'), changed && currentTabWasSet);
-    currentTabWasSet = true;
-    if (opts.focus) $('[data-tab="' + name + '"][role="tab"]').focus();
-    // Recalculate layout first (panel heights differ), then scroll, so the refresh can't cancel the scroll
-    if (hasGsap && changed) ScrollTrigger.refresh();
-    if (opts.scroll) {
-      whatSeen = true;
-      var top = $('#what').getBoundingClientRect().top + window.scrollY - 70;
-      window.scrollTo({ top: top, behavior: reduce ? 'auto' : 'smooth' });
-    }
-    if (changed) onPanelShown(name);
-  }
-
-  tabBtns.forEach(function (b, i) {
-    b.addEventListener('click', function () { if (dragMoved) return; showTab(b.dataset.tab); });
-    b.addEventListener('keydown', function (e) {
-      var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
-      if (!d) return;
-      e.preventDefault();
-      showTab(tabNames[(i + d + tabNames.length) % tabNames.length], { focus: true });
-    });
-  });
-  /* ---------- Glass lens on the tab bar: click, drag, or arrow keys ---------- */
-  var tabsEl = $('.what-tabs'), lens = $('.lens');
-  var dragging = false, dragMoved = false, dragStartX = 0, lensStartLeft = 0;
-  function markUnder(centerX) {
-    tabBtns.forEach(function (b) {
-      var under = centerX == null ? b.getAttribute('aria-selected') === 'true'
-        : (centerX >= b.offsetLeft && centerX < b.offsetLeft + b.offsetWidth);
-      b.classList.toggle('is-under', under);
-    });
-  }
-  function placeLens(btn, squash) {
-    if (!lens || !btn) return;
-    lens.style.left = btn.offsetLeft + 'px';
-    lens.style.width = btn.offsetWidth + 'px';
-    markUnder();
-    if (squash && animate) gsap.fromTo(lens, { scaleX: 1.12, scaleY: .88 }, { scaleX: 1, scaleY: 1, duration: .7, ease: 'elastic.out(1, .45)' });
-  }
-  function nearestTab(centerX) {
-    var best = tabBtns[0], dist = Infinity;
-    tabBtns.forEach(function (b) { var c = b.offsetLeft + b.offsetWidth / 2, d = Math.abs(c - centerX); if (d < dist) { dist = d; best = b; } });
-    return best;
-  }
-  if (lens) {
-    tabsEl.addEventListener('pointerdown', function (e) {
-      var r = lens.getBoundingClientRect();
-      if (e.clientX < r.left || e.clientX > r.right) return; // not on the lens: normal tab click
-      dragging = true; dragMoved = false; dragStartX = e.clientX; lensStartLeft = lens.offsetLeft;
-      lens.classList.add('dragging');
-      tabsEl.setPointerCapture(e.pointerId);
-    });
-    tabsEl.addEventListener('pointermove', function (e) {
-      if (!dragging) return;
-      var dx = e.clientX - dragStartX;
-      if (Math.abs(dx) > 4) dragMoved = true;
-      var min = tabBtns[0].offsetLeft, max = tabBtns[tabBtns.length - 1].offsetLeft + tabBtns[tabBtns.length - 1].offsetWidth - lens.offsetWidth;
-      var left = Math.max(min, Math.min(max, lensStartLeft + dx));
-      lens.style.left = left + 'px';
-      // stretch a little with speed, like liquid glass
-      var stretch = Math.min(.12, Math.abs(e.movementX || 0) / 120);
-      lens.style.transform = 'scaleX(' + (1 + stretch) + ') scaleY(' + (1 - stretch / 1.5) + ')';
-      markUnder(left + lens.offsetWidth / 2);
-    });
-    var endDrag = function (e) {
-      if (!dragging) return;
-      dragging = false;
-      lens.classList.remove('dragging');
-      lens.style.transform = '';
-      var target = nearestTab(lens.offsetLeft + lens.offsetWidth / 2);
-      if (dragMoved) { showTab(target.dataset.tab); target.focus({ preventScroll: true }); }
-      else { placeLens($('.what-tabs [aria-selected="true"]')); }
-      setTimeout(function () { dragMoved = false; }, 0);
-    };
-    tabsEl.addEventListener('pointerup', endDrag);
-    tabsEl.addEventListener('pointercancel', endDrag);
-    window.addEventListener('resize', function () { placeLens($('.what-tabs [aria-selected="true"]')); });
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { placeLens($('.what-tabs [aria-selected="true"]')); });
-  }
-
-  // Any link to #about / #fund / #how / #fit (menu, footer, hero CTA) opens that tab
-  $$('a[data-tab]').forEach(function (a) {
-    a.addEventListener('click', function (e) { e.preventDefault(); showTab(a.dataset.tab, { scroll: true }); history.replaceState(null, '', '#' + a.dataset.tab); });
-  });
-  // Initial: hide non-active panels (they stay visible if JS fails); honour a deep link
-  var initial = tabNames.indexOf(location.hash.slice(1)) >= 0 ? location.hash.slice(1) : 'about';
-  showTab(initial);
+  };
 
   /* ---------- Fit checker ---------- */
   var answers = {};
@@ -331,7 +220,6 @@
   gsap.set(['.hero-place', '.hero-btns'], { opacity: 0, y: 20 });
   gsap.set(heroWords, { yPercent: 110, opacity: 0 });
   gsap.set('.island', { y: 160, opacity: 0 });
-  gsap.set(fillWords, { color: 'rgba(16,54,87,.16)' });
 
   /* Loader → hero intro */
   var counter = { v: 0 };
@@ -357,9 +245,14 @@
     .fromTo('.stat', { y: 30, opacity: 0 }, { y: 0, opacity: 1, stagger: .12, duration: .4, ease: 'back.out(1.6)' }, .85)
     .to({}, { duration: .4 });
 
-  /* What header + tabs rise in; the open panel's entrance plays when the section arrives */
-  gsap.from(['.what-head', '.what-tabs'], { y: 40, opacity: 0, stagger: .12, duration: .8, scrollTrigger: { trigger: '.what', start: 'top 75%' } });
-  ScrollTrigger.create({ trigger: '.what', start: 'top 60%', once: true, onEnter: function () { if (!whatSeen) { whatSeen = true; onPanelShown(currentTab); } } });
+  /* Each section's entrance plays once, when it scrolls into view */
+  Object.keys(entrances).forEach(function (id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    if (id !== 'fit') gsap.from(el.querySelectorAll('.sec-eyebrow'), { y: 20, opacity: 0, duration: .6, scrollTrigger: { trigger: el, start: 'top 80%' } });
+    ScrollTrigger.create({ trigger: el, start: 'top 72%', once: true, onEnter: entrances[id] });
+  });
+  gsap.set(fillWords, { color: 'rgba(16,54,87,.16)' });
 
   /* Generic reveals (FAQ, footer) */
   ScrollTrigger.batch('.reveal', { start: 'top 88%', onEnter: function (els) { gsap.to(els, { opacity: 1, y: 0, stagger: .08, duration: .8, overwrite: true }); } });
