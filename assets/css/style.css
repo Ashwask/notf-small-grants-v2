@@ -145,7 +145,7 @@ img, svg { display: block; max-width: 100%; }
 .place.roll-out { transform: translateY(-110%); opacity: 0; }
 .place.roll-in { transform: translateY(110%); opacity: 0; transition: none; }
 .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 24px; }
-.island-wrap { --iw: min(1600px, 100vw, calc((100vh - 110px) * 1.5)); position: absolute; left: 0; right: 0; margin: 0 auto; width: var(--iw); bottom: 0; min-width: 300px; z-index: 2; pointer-events: none; transform-origin: 50% 40%; } /* whole island visible on load */
+.island-wrap { --iw: min(1080px, 90vw, calc((100vh - 310px) * 1.5)); position: absolute; left: 0; right: 0; margin: 0 auto; width: var(--iw); bottom: 0; min-width: 300px; z-index: 2; pointer-events: none; transform-origin: 50% 40%; } /* whole island visible on load */
 .island { width: 100%; height: auto; display: block; aspect-ratio: 3 / 2; object-fit: cover; }
 /* Feather the video's cloud edges into the sky; the video itself is unaltered */
 .island-wrap { -webkit-mask-image: radial-gradient(ellipse 56% 56% at 50% 50%, #000 82%, transparent 100%); mask-image: radial-gradient(ellipse 56% 56% at 50% 50%, #000 82%, transparent 100%); }

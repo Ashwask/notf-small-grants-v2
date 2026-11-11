@@ -263,10 +263,10 @@
 
   /* 1. Hero: as you scroll, the island zooms in and drifts down over the About
      section, then fades; the headline lifts away. Scrubbed, so it reverses. */
-  gsap.timeline({ scrollTrigger: { trigger: '.hero', start: 'top top', end: '+=140%', scrub: .6 } })
+  gsap.timeline({ scrollTrigger: { trigger: '.hero', start: 'top top', end: '+=110%', scrub: .6 } })
     .to('.hero-copy', { y: -90, opacity: 0, ease: 'none', duration: .35 }, 0)
-    .to('.island-wrap', { scale: 1.6, yPercent: 45, ease: 'none', duration: 1 }, 0)
-    .to('.island-wrap', { opacity: 0, ease: 'power1.in', duration: .4 }, .6);
+    .to('.island-wrap', { scale: 1.25, yPercent: 30, ease: 'none', duration: 1 }, 0)
+    .to('.island-wrap', { opacity: 0, ease: 'power1.in', duration: .45 }, .35);
 
   /* About: scrubbed with the scroll. Heading rises word by word, lead fills in,
      facts pop one by one, video frame grows into place, principles rise in turn. */
