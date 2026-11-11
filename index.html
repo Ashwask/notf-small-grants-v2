@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NoTF BLR Small Grants | The fix is local</title>
+<meta name="description" content="Small grants of ₹50,000 to ₹2,00,000 for people, collectives and organisations solving neighbourhood problems in Bengaluru.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="assets/img/favicon-32x32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Albert+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+<link rel="stylesheet" href="assets/css/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="assets/js/main.js" defer></script>
+</head>
+<body>
+
+<!-- Loader -->
+<div class="loader" aria-hidden="true">
+  <img src="assets/img/notf-terracotta.png" alt="" class="loader-logo">
+  <div class="loader-count"><span id="loaderNum">0</span>%</div>
+</div>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- Top bar -->
+<header class="topbar">
+  <a href="#home" class="brand">
+    <img src="assets/img/notf-terracotta.png" alt="NoTF" width="86" height="36">
+    <span>BLR Small Grants</span>
+  </a>
+  <a href="#apply" class="topbar-cta">Apply now</a>
+</header>
+
+<!-- Floating bottom nav pill (morphs into a menu) -->
+<nav class="navpill" aria-label="Sections">
+  <div class="navpill-panel" id="navPanel" hidden>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#fund">What we fund</a>
+    <a href="#how">How it works</a>
+    <a href="#fit">Is this you?</a>
+    <a href="#faq">FAQs</a>
+    <a href="#apply" class="navpill-apply">Apply now</a>
+  </div>
+  <div class="navpill-bar">
+    <span class="navpill-label"><span id="navLabel">Home</span></span>
+    <button class="navpill-btn" id="navBtn" aria-expanded="false" aria-controls="navPanel" aria-label="Open menu">
+      <span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<main id="main">
+
+  <!-- 1. HERO (pinned: island zooms away, statement + stats appear) -->
+  <section class="hero" id="home" data-nav="Home">
+    <div class="sky"></div>
+    <div class="clouds clouds-hero" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+    <div class="hero-copy">
+      <h1 class="hero-title split"><span class="tone">The fix</span> is local.</h1>
+      <p class="hero-sub">Small grants for people, collectives and organisations solving neighbourhood problems in Bengaluru. Solve it in <span class="place" id="place">Yelahanka</span>. Share it with the city.</p>
+      <a href="#fit" class="btn btn-green">Is this you?</a>
+    </div>
+
+    <div class="island-wrap">
+      <svg class="island" viewBox="0 0 800 520" role="img" aria-label="Illustration: a Bengaluru neighbourhood on a floating island">
+        <defs>
+          <linearGradient id="gGrass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9CCB6A"/><stop offset="1" stop-color="#6FA94A"/></linearGradient>
+          <linearGradient id="gEarth" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B9774A"/><stop offset="1" stop-color="#7A4A2C"/></linearGradient>
+          <linearGradient id="gWater" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8FD0F0"/><stop offset="1" stop-color="#4E9BCB"/></linearGradient>
+        </defs>
+        <!-- earth underside -->
+        <path d="M110 300 L400 450 L690 300 L640 380 L520 470 L420 515 L330 480 L210 420 Z" fill="url(#gEarth)"/>
+        <path d="M210 420 L330 480 L420 515 L400 450 Z" fill="#6A3F25" opacity=".55"/>
+        <!-- grass top (isometric diamond) -->
+        <path d="M110 300 L400 150 L690 300 L400 450 Z" fill="url(#gGrass)"/>
+        <path d="M110 300 L400 450 L400 462 L110 312 Z" fill="#5E8F3D"/>
+        <path d="M400 450 L690 300 L690 312 L400 462 Z" fill="#4F7D33"/>
+        <!-- lane -->
+        <path d="M180 300 C 300 330, 330 260, 430 290 S 600 330, 640 300" stroke="#F4ECD8" stroke-width="26" fill="none" stroke-linecap="round"/>
+        <path d="M180 300 C 300 330, 330 260, 430 290 S 600 330, 640 300" stroke="#E2D6BA" stroke-width="2" stroke-dasharray="10 12" fill="none"/>
+        <!-- lake / rain garden -->
+        <ellipse cx="520" cy="360" rx="70" ry="30" fill="url(#gWater)"/>
+        <ellipse cx="505" cy="353" rx="22" ry="6" fill="#fff" opacity=".5"/>
+        <!-- house 1 -->
+        <g class="bob-a"><path d="M250 250 l50 -26 l50 26 l0 44 l-50 26 l-50 -26 z" fill="#FAF6E8"/><path d="M300 276 l50 -26 l0 44 l-50 26 z" fill="#E7DFC8"/><path d="M244 252 l56 -50 l56 50 l-56 28 z" fill="#C45A2A"/><path d="M300 202 l56 50 l-6 3 l-50 -45 z" fill="#963F1B"/><rect x="268" y="268" width="14" height="22" fill="#2F4A2C"/><rect x="315" y="270" width="16" height="14" fill="#8FD0F0"/></g>
+        <!-- house 2 -->
+        <g class="bob-b"><path d="M380 200 l40 -20 l40 20 l0 36 l-40 20 l-40 -20 z" fill="#F5B82E"/><path d="M420 220 l40 -20 l0 36 l-40 20 z" fill="#DDA629"/><path d="M376 202 l44 -22 l44 22 l-44 22 z" fill="#3F5F7A"/><rect x="392" y="216" width="12" height="12" fill="#FAF6E8"/></g>
+        <!-- water tank -->
+        <g><rect x="470" y="210" width="6" height="40" fill="#7A7A7A"/><rect x="500" y="210" width="6" height="40" fill="#5A5A5A"/><ellipse cx="488" cy="210" rx="26" ry="10" fill="#3F5F7A"/><rect x="462" y="186" width="52" height="24" fill="#4E7391"/><ellipse cx="488" cy="186" rx="26" ry="10" fill="#6A8FAD"/></g>
+        <!-- trees -->
+        <g class="sway"><rect x="196" y="250" width="6" height="30" fill="#6A3F25"/><circle cx="199" cy="240" r="22" fill="#2F4A2C"/><circle cx="188" cy="232" r="12" fill="#3E6139"/></g>
+        <g class="sway"><rect x="586" y="250" width="6" height="28" fill="#6A3F25"/><circle cx="589" cy="236" r="24" fill="#C8483A"/><circle cx="600" cy="228" r="12" fill="#E06A4E"/></g>
+        <g class="sway"><rect x="356" y="330" width="5" height="22" fill="#6A3F25"/><circle cx="358" cy="322" r="16" fill="#3E6139"/></g>
+        <g class="sway"><rect x="636" y="320" width="5" height="22" fill="#6A3F25"/><circle cx="638" cy="312" r="15" fill="#2F4A2C"/></g>
+        <!-- bench + compost bins -->
+        <rect x="420" y="330" width="40" height="6" rx="2" fill="#8A5A3A"/><rect x="424" y="336" width="4" height="10" fill="#5A3A22"/><rect x="452" y="336" width="4" height="10" fill="#5A3A22"/>
+        <rect x="228" y="330" width="18" height="20" rx="3" fill="#37863A"/><rect x="250" y="330" width="18" height="20" rx="3" fill="#3F5F7A"/><rect x="272" y="330" width="18" height="20" rx="3" fill="#C45A2A"/>
+        <!-- people -->
+        <g class="walk"><circle cx="300" cy="300" r="5" fill="#2B2B2B"/><rect x="296" y="305" width="8" height="14" rx="3" fill="#C45A2A"/></g>
+        <g class="walk-2"><circle cx="560" cy="300" r="5" fill="#2B2B2B"/><rect x="556" y="305" width="8" height="14" rx="3" fill="#F5B82E"/></g>
+        <circle cx="440" cy="322" r="4.5" fill="#2B2B2B"/><rect x="436" y="326" width="8" height="10" rx="3" fill="#3F5F7A"/>
+        <!-- bunting -->
+        <path d="M250 200 Q 330 230 400 196" stroke="#2B2B2B" stroke-width="1.2" fill="none"/>
+        <path d="M268 206 l6 12 l6 -10 z M292 214 l6 12 l6 -10 z M318 218 l6 12 l6 -10 z M346 216 l6 12 l6 -10 z M372 208 l6 12 l6 -10 z" fill="#F5B82E"/>
+        <!-- floating sign -->
+        <g class="bob-a"><rect x="610" y="150" width="120" height="44" rx="22" fill="#fff"/><text x="670" y="178" text-anchor="middle" font-family="Bricolage Grotesque, sans-serif" font-size="17" font-weight="600" fill="#214895">₹50K to 2L</text></g>
+        <g class="bob-b"><rect x="70" y="190" width="104" height="40" rx="20" fill="#fff"/><text x="122" y="216" text-anchor="middle" font-family="Bricolage Grotesque, sans-serif" font-size="16" font-weight="600" fill="#37863A">6 months</text></g>
+      </svg>
+    </div>
+
+    <div class="statement" aria-hidden="true">
+      <p class="statement-text">Neighbourhood fixes, funded in Bengaluru and shared with the city.</p>
+      <div class="stats">
+        <div class="stat"><b>₹2,00,000</b><span>Maximum grant, starting from ₹50,000</span></div>
+        <div class="stat"><b>6 months</b><span>Maximum grant duration</span></div>
+        <div class="stat"><b>~10</b><span>Grants in this round</span></div>
+        <div class="stat"><b>0</b><span>Interim reports. Just a story at the end.</span></div>
+      </div>
+    </div>
+
+    <a href="#about" class="hero-why">Why apply? <i class="fa-solid fa-chevron-down"></i></a>
+  </section>
+
+  <!-- 2. ABOUT: word fill + two columns + growing photo + stamps -->
+  <section class="about" id="about" data-nav="About">
+    <div class="wrap">
+      <p class="eyebrow">Neighbourhoods of the Future · Small grants</p>
+      <h2 class="fill-text">Small, short-term grants for people <em>already solving</em> neighbourhood problems, who just need a push across the finish line.</h2>
+      <div class="about-cols">
+        <div class="reveal"><h3>Solve it where you live</h3><p>The people who live with a problem know it best. We back fixes led by the neighbourhood itself.</p></div>
+        <div class="reveal"><h3>Borrow, don't reinvent</h3><p>If a fix worked in one neighbourhood, adapt it for yours. Every grant ends with a story or playbook, so the next one can start where you left off.</p></div>
+      </div>
+    </div>
+    <div class="grow">
+      <div class="grow-media">
+        <div class="grow-scene" aria-hidden="true">
+          <div class="chat">
+            <p class="bubble">Ours is the only lane in Yelahanka where the drain overflows every monsoon.<time>9:12 am</time></p>
+            <p class="bubble me">This fixed the same issue in Jayanagar. Should we try it here?<time>9:15 am</time></p>
+            <p class="bubble">Can we do it Saturday morning? I'll bring tools.<time>9:20 am</time></p>
+          </div>
+          <span class="photo-note">Photo or video: neighbours at work on a local fix</span>
+        </div>
+        <div class="stamps">
+          <svg class="stamp" viewBox="0 0 120 120" aria-label="Grants of 50 thousand to 2 lakh rupees"><circle cx="60" cy="60" r="56" fill="#214895"/><circle cx="60" cy="60" r="46" fill="none" stroke="#fff" stroke-width="1.5"/><path id="s1" d="M60 60 m-38 0 a38 38 0 1 1 76 0" fill="none"/><text font-size="10" font-weight="600" fill="#fff" letter-spacing="2"><textPath href="#s1" startOffset="50%" text-anchor="middle">GRANT SIZE</textPath></text><text x="60" y="68" text-anchor="middle" font-size="17" font-weight="700" fill="#fff">₹50K</text><text x="60" y="86" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">TO ₹2 LAKH</text></svg>
+          <svg class="stamp" viewBox="0 0 120 120" aria-label="Up to 6 months"><circle cx="60" cy="60" r="56" fill="#fff"/><circle cx="60" cy="60" r="46" fill="none" stroke="#214895" stroke-width="1.5"/><path id="s2" d="M60 60 m-38 0 a38 38 0 1 1 76 0" fill="none"/><text font-size="10" font-weight="600" fill="#214895" letter-spacing="2"><textPath href="#s2" startOffset="50%" text-anchor="middle">UP TO</textPath></text><text x="60" y="74" text-anchor="middle" font-size="34" font-weight="700" fill="#214895">6</text><text x="60" y="90" text-anchor="middle" font-size="11" font-weight="600" fill="#214895">MONTHS</text></svg>
+          <svg class="stamp" viewBox="0 0 120 120" aria-label="Bengaluru only"><circle cx="60" cy="60" r="56" fill="#214895"/><circle cx="60" cy="60" r="46" fill="none" stroke="#fff" stroke-width="1.5"/><path id="s3" d="M60 60 m-38 0 a38 38 0 1 1 76 0" fill="none"/><text font-size="10" font-weight="600" fill="#fff" letter-spacing="2"><textPath href="#s3" startOffset="50%" text-anchor="middle">OPEN IN</textPath></text><text x="60" y="68" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">BENGALURU</text><text x="60" y="84" text-anchor="middle" font-size="10" font-weight="600" fill="#fff">ONLY</text></svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. WHAT WE FUND: pinned showcase, cloud bubble, pills -->
+  <section class="fund" id="fund" data-nav="What we fund">
+    <div class="fund-stage">
+      <p class="fund-kicker">What we fund. <span>Pick a theme, or scroll.</span></p>
+      <div class="cloud-bubble" id="fundBubble">
+        <h3 id="fundTitle">Public spaces</h3>
+        <p id="fundLine">Parks, footpaths, play areas, bus stops</p>
+        <button class="details-btn" id="fundDetailsBtn" aria-expanded="false" aria-controls="fundDetails">Details <i class="fa-solid fa-plus"></i></button>
+        <p class="fund-details" id="fundDetails" hidden></p>
+      </div>
+      <div class="fund-tile" id="fundTile" aria-hidden="true"><i class="fa-solid fa-tree-city" id="fundIcon"></i></div>
+      <div class="fund-pills" role="tablist" aria-label="Themes">
+        <button class="pill is-active" role="tab" aria-selected="true" data-i="0">Public spaces</button>
+        <button class="pill" role="tab" aria-selected="false" data-i="1">Waste</button>
+        <button class="pill" role="tab" aria-selected="false" data-i="2">Water</button>
+        <button class="pill" role="tab" aria-selected="false" data-i="3">Trees and greening</button>
+        <button class="pill" role="tab" aria-selected="false" data-i="4">Walking and mobility</button>
+      </div>
+      <div class="clouds clouds-low" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    </div>
+  </section>
+
+  <!-- 4. RANGE LINE -->
+  <section class="range" data-nav="Grant size">
+    <div class="wrap range-wrap">
+      <div class="range-line">
+        <span class="range-end">from ₹50,000</span>
+        <div class="range-track">
+          <span class="range-bar"></span>
+          <span class="range-item r1"><i class="fa-solid fa-seedling"></i><small>Seed a pilot</small></span>
+          <span class="range-item r2"><i class="fa-solid fa-toolbox"></i><small>Kits and materials</small></span>
+          <span class="range-item r3"><i class="fa-solid fa-trowel-bricks"></i><small>Build it out</small></span>
+          <span class="range-item r4"><i class="fa-solid fa-people-roof"></i><small>Finish the fix</small></span>
+        </div>
+        <span class="range-end">to ₹2,00,000</span>
+      </div>
+      <p class="range-text reveal">Grants of ₹50,000 to ₹2,00,000 for up to 6 months, sized to what your fix needs. About 10 grants in this round, decided as applications come in.</p>
+    </div>
+  </section>
+
+  <!-- 5. HOW IT WORKS: tabs with active dot, arc panel -->
+  <section class="how" id="how" data-nav="How it works">
+    <div class="how-stage">
+      <div class="how-card" aria-hidden="true"><span id="howBig">01</span><i class="fa-solid fa-pen-to-square" id="howIcon"></i></div>
+      <div class="how-mid">
+        <ol class="how-tabs" role="tablist" aria-label="Steps">
+          <li><button role="tab" aria-selected="true" data-i="0" class="is-active">You apply</button></li>
+          <li><button role="tab" aria-selected="false" data-i="1">We get to know you</button></li>
+          <li><button role="tab" aria-selected="false" data-i="2">The decision</button></li>
+          <li><button role="tab" aria-selected="false" data-i="3">Funds arrive</button></li>
+        </ol>
+        <p class="how-text" id="howText">Fill in and submit the application form linked at the end of this page.</p>
+      </div>
+      <div class="how-arc" id="howArc" aria-hidden="true">
+        <div class="how-arc-scene" id="howScene"><i class="fa-solid fa-file-pen"></i><span>Photo for this step</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. DARK: rolling call -->
+  <section class="rolling" id="rolling" data-nav="Rolling call">
+    <div class="rolling-bg" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="rolling-inner">
+      <h2 class="rolling-title words">Rolling call. Six weeks, give or take.</h2>
+      <p class="rolling-para words">Applications stay open until the funds are used, and decisions are made as they come in. No deadline to chase. No interim reports either: just tell us how it's going.</p>
+      <div class="checks">
+        <div><h3>Who it's for</h3><ul><li>Individuals, collectives and organisations</li><li>Based in Bengaluru</li><li>Tackling a specific neighbourhood problem</li><li>With an idea that could travel</li></ul></div>
+        <div><h3>What we ask at the end</h3><ul><li>A story or playbook of your fix</li><li>A fund utilisation certificate</li><li>That's it. No interim reports.</li></ul></div>
+      </div>
+    </div>
+    <span class="scroll-hint"><i class="fa-solid fa-angles-down"></i> Scroll to learn more</span>
+  </section>
+
+  <!-- 7. CITY: disc with pins -->
+  <section class="city" data-nav="Across the city">
+    <div class="wrap">
+      <h2 class="city-title">From one lane to the whole city</h2>
+      <div class="city-grid">
+        <ul class="arrows">
+          <li class="reveal">Open to individuals, collectives and organisations <small>Resident groups · NGOs · neighbours</small></li>
+          <li class="reveal">Decided as applications come in, no deadline to chase</li>
+          <li class="reveal">Every fix becomes a story the next neighbourhood can borrow</li>
+        </ul>
+        <svg class="city-disc" viewBox="0 0 500 500" role="img" aria-label="Stylised map of Bengaluru with neighbourhood pins">
+          <circle class="orbit" cx="250" cy="250" r="240" fill="none" stroke="#9DB7D6" stroke-width="1"/>
+          <circle class="orbit" cx="250" cy="250" r="210" fill="none" stroke="#9DB7D6" stroke-width="1" stroke-dasharray="4 6"/>
+          <circle cx="250" cy="250" r="185" fill="#7F99B8"/>
+          <path d="M120 170 C 170 110, 300 90, 370 150 C 430 200, 420 300, 360 360 C 300 420, 180 410, 130 340 C 90 280, 90 210, 120 170 Z" fill="#F4EFD9"/>
+          <!-- lakes -->
+          <ellipse cx="300" cy="210" rx="18" ry="11" fill="#8FC3E2"/><ellipse cx="200" cy="300" rx="14" ry="9" fill="#8FC3E2"/><ellipse cx="320" cy="320" rx="20" ry="10" fill="#8FC3E2"/><ellipse cx="170" cy="200" rx="10" ry="7" fill="#8FC3E2"/>
+          <!-- roads -->
+          <circle cx="250" cy="255" r="95" fill="none" stroke="#E2D6BA" stroke-width="5"/>
+          <path d="M250 110 L250 400 M120 255 L390 255 M150 160 L350 360 M350 150 L150 360" stroke="#E2D6BA" stroke-width="3"/>
+          <!-- green areas -->
+          <path d="M230 230 q20 -18 40 0 q-4 22 -20 24 q-18 -4 -20 -24z" fill="#9CCB6A"/>
+          <g class="pins">
+            <g transform="translate(250 130)"><path d="M0 0 c-9 -12 -9 -24 0 -24 c9 0 9 12 0 24z" fill="#37863A"/><circle cy="-16" r="3.5" fill="#fff"/><text y="-30" text-anchor="middle">Yelahanka</text></g>
+            <g transform="translate(330 205)"><path d="M0 0 c-9 -12 -9 -24 0 -24 c9 0 9 12 0 24z" fill="#37863A"/><circle cy="-16" r="3.5" fill="#fff"/><text y="-30" text-anchor="middle">Hebbal</text></g>
+            <g transform="translate(372 270)"><path d="M0 0 c-9 -12 -9 -24 0 -24 c9 0 9 12 0 24z" fill="#37863A"/><circle cy="-16" r="3.5" fill="#fff"/><text y="-30" text-anchor="middle">Whitefield</text></g>
+            <g transform="translate(205 225)"><path d="M0 0 c-9 -12 -9 -24 0 -24 c9 0 9 12 0 24z" fill="#37863A"/><circle cy="-16" r="3.5" fill="#fff"/><text y="-30" text-anchor="middle">Malleswaram</text></g>
+            <g transform="translate(285 285)"><path d="M0 0 c-9 -12 -9 -24 0 -24 c9 0 9 12 0 24z" fill="#37863A"/><circle cy="-16" r="3.5" fill="#fff"/><text y="-30" text-anchor="middle">Frazer Town</text></g>
+            <g transform="translate(225 345)"><path d="M0 0 c-9 -12 -9 -24 0 -24 c9 0 9 12 0 24z" fill="#37863A"/><circle cy="-16" r="3.5" fill="#fff"/><text y="-30" text-anchor="middle">Jayanagar</text></g>
+            <g transform="translate(310 365)"><path d="M0 0 c-9 -12 -9 -24 0 -24 c9 0 9 12 0 24z" fill="#37863A"/><circle cy="-16" r="3.5" fill="#fff"/><text y="-30" text-anchor="middle">HSR Layout</text></g>
+            <g transform="translate(165 300)"><path d="M0 0 c-9 -12 -9 -24 0 -24 c9 0 9 12 0 24z" fill="#37863A"/><circle cy="-16" r="3.5" fill="#fff"/><text y="-30" text-anchor="middle">Basavanagudi</text></g>
+          </g>
+        </svg>
+        <div class="city-side reveal">
+          <p>Small grants for neighbourhood problems across Bengaluru, from a single lane to a whole ward. Pins are illustrative.</p>
+          <a href="#fit" class="btn btn-green">Take the 30-second check</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. FIT CHECK -->
+  <section class="fit" id="fit" data-nav="Is this you?">
+    <div class="wrap">
+      <h2 class="center reveal">Thirty seconds to see if your idea fits.</h2>
+      <div class="sentence reveal">
+        <span>I'm</span>
+        <label class="sr" for="fitWho">Who you are</label>
+        <select id="fitWho"><option>an individual</option><option selected>a collective</option><option>an organisation</option></select>
+        <span>working on</span>
+        <label class="sr" for="fitWhat">What you're working on</label>
+        <select id="fitWhat" class="filled"><option>public spaces</option><option>waste</option><option>water</option><option>trees and greening</option><option>walking and mobility</option><option>safety</option><option>something else</option></select>
+        <span>in</span>
+        <label class="sr" for="fitWhere">Your neighbourhood</label>
+        <input id="fitWhere" type="text" placeholder="your neighbourhood" maxlength="40" autocomplete="off">
+      </div>
+      <div class="fit-grid">
+        <ol class="qs">
+          <li class="q reveal" data-q="1"><span class="qn">01</span><span id="q1">Are you based in Bengaluru?</span><span class="qa" role="radiogroup" aria-labelledby="q1"><button role="radio" aria-checked="false" data-a="yes">Yes</button><button role="radio" aria-checked="false" data-a="no">Not quite</button></span></li>
+          <li class="q reveal" data-q="2"><span class="qn">02</span><span id="q2">Are you tackling a specific neighbourhood problem or opportunity?</span><span class="qa" role="radiogroup" aria-labelledby="q2"><button role="radio" aria-checked="false" data-a="yes">Yes</button><button role="radio" aria-checked="false" data-a="no">Not quite</button></span></li>
+          <li class="q reveal" data-q="3"><span class="qn">03</span><span id="q3">Could your idea or solution work in another neighbourhood too?</span><span class="qa" role="radiogroup" aria-labelledby="q3"><button role="radio" aria-checked="false" data-a="yes">Yes</button><button role="radio" aria-checked="false" data-a="no">Not quite</button></span></li>
+        </ol>
+        <div class="verdict reveal" id="verdict" data-state="idle" aria-live="polite">
+          <div class="verdict-progress"><span id="verdictBar"></span></div>
+          <p class="verdict-title" id="verdictTitle">Answer all three.</p>
+          <p class="verdict-text" id="verdictText">Your verdict shows up here. Nothing is saved or sent.</p>
+          <a href="#apply" class="btn btn-green" id="verdictCta" hidden>Apply now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. FAQ -->
+  <section class="faq" id="faq" data-nav="FAQs">
+    <div class="wrap faq-grid">
+      <div class="reveal">
+        <h2>Frequently asked questions.</h2>
+        <p class="muted">Still have questions? Write to <span class="tbd">[contact email]</span></p>
+      </div>
+      <div class="faq-list">
+        <details class="reveal" open><summary>What is the NoTF BLR Small Grants Program?</summary><p>It awards small, short-term grants to individuals, collectives and organisations who are solving neighbourhood problems in Bengaluru.</p></details>
+        <details class="reveal"><summary>Who can apply?</summary><p>Individuals, informal collectives (such as resident groups) and registered organisations working on a specific neighbourhood problem in Bengaluru.</p></details>
+        <details class="reveal"><summary>What will you fund?</summary><p>Work that helps you finish a neighbourhood fix: materials, small equipment, local labour, events and outreach. We prefer ideas already underway, and ideas that could work in another neighbourhood too.</p></details>
+        <details class="reveal"><summary>What is the grant value and duration?</summary><p>Between ₹50,000 and ₹2,00,000, for up to 6 months.</p></details>
+        <details class="reveal"><summary>How many grants are available?</summary><p>About 10 in this round.</p></details>
+        <details class="reveal"><summary>What does the application process look like?</summary><p>Apply online, have a short conversation with us, and hear our decision within about six weeks. Applications are reviewed as they come in.</p></details>
+        <details class="reveal"><summary>What are the reporting requirements?</summary><p>No interim reports. At the end, a story or playbook of your fix and a fund utilisation certificate.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. FOOTER CTA -->
+  <footer class="footer" id="apply" data-nav="Apply">
+    <div class="wrap footer-top">
+      <h2 class="reveal">Ready to finish your fix?</h2>
+      <p class="reveal">The fix is local. The idea travels. If you're already working on a neighbourhood fix and just need a push across the finish line, we'd love to hear from you.</p>
+      <div class="footer-btns reveal">
+        <a href="#faq" class="btn btn-white">Read the FAQs</a>
+        <a href="#apply" class="btn btn-green js-apply">Apply now</a>
+      </div>
+      <p class="apply-soon" id="applySoon" hidden>Application form opens soon</p>
+    </div>
+    <div class="wrap footer-cols">
+      <div><h4>Quick links</h4><a href="#home">Home</a><a href="#about">About</a><a href="#fund">What we fund</a><a href="#how">How it works</a><a href="#faq">FAQs</a></div>
+      <svg class="footer-globe" viewBox="0 0 400 220" aria-hidden="true"><circle cx="200" cy="220" r="190" fill="#7F99B8"/><path d="M60 200 C 100 120, 260 90, 330 160 C 350 180, 345 205, 340 220 L70 220 Z" fill="#F4EFD9"/><circle cx="200" cy="220" r="210" fill="none" stroke="#9DB7D6"/></svg>
+      <div><h4>Get in touch</h4><a href="#apply">Apply now</a><span class="tbd">[contact email]</span><a href="https://www.notf.in">notf.in</a></div>
+    </div>
+    <div class="clouds clouds-foot" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="footbar">
+      <span>NoTF BLR Small Grants · A program of Neighbourhoods of the Future</span>
+      <span>Powered by <img src="assets/img/rainmatter-logo.png" alt="Rainmatter Foundation"> · Part of PDGI · <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></span>
+    </div>
+  </footer>
+</main>
+</body>
+</html>
