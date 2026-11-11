@@ -39,10 +39,11 @@
 <nav class="navpill" aria-label="Sections">
   <div class="navpill-panel" id="navPanel" hidden>
     <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#fund">What we fund</a>
-    <a href="#how">How it works</a>
-    <a href="#fit">Is this you?</a>
+    <a href="#what" class="navpill-group">What</a>
+    <a href="#about" class="navpill-sub" data-tab="about">About</a>
+    <a href="#fund" class="navpill-sub" data-tab="fund">What we fund</a>
+    <a href="#how" class="navpill-sub" data-tab="how">How it works</a>
+    <a href="#fit" class="navpill-sub" data-tab="fit">Is this you?</a>
     <a href="#faq">FAQs</a>
     <a href="#apply" class="navpill-apply">Apply now</a>
   </div>
@@ -64,7 +65,7 @@
     <div class="hero-copy">
       <h1 class="hero-title split"><span class="tone">The fix</span> is local.</h1>
       <p class="hero-sub">Small grants for people, collectives and organisations solving neighbourhood problems in Bengaluru. Solve it in <span class="place" id="place">Yelahanka</span>. Share it with the city.</p>
-      <a href="#fit" class="btn btn-green">Is this you?</a>
+      <a href="#fit" class="btn btn-green" data-tab="fit">Is this you?</a>
     </div>
 
     <div class="island-wrap">
@@ -81,157 +82,110 @@
       </div>
     </div>
 
-    <a href="#about" class="hero-why">Why apply? <i class="fa-solid fa-chevron-down"></i></a>
+    <a href="#what" class="hero-why">Why apply? <i class="fa-solid fa-chevron-down"></i></a>
   </section>
 
-  <!-- 2. ABOUT: word fill + two columns + growing photo + stamps -->
-  <section class="about" id="about" data-nav="About">
+  <!-- 2. WHAT: one section, four tabs (About / What we fund / How it works / Is this you?) -->
+  <section class="what" id="what" data-nav="What">
     <div class="wrap">
-      <p class="eyebrow">Neighbourhoods of the Future · Small grants</p>
-      <h2 class="fill-text">Small, short-term grants for people <em>already solving</em> neighbourhood problems, who just need a push across the finish line.</h2>
-      <div class="about-cols">
-        <div class="reveal"><h3>Solve it where you live</h3><p>The people who live with a problem know it best. We back fixes led by the neighbourhood itself.</p></div>
-        <div class="reveal"><h3>Borrow, don't reinvent</h3><p>If a fix worked in one neighbourhood, adapt it for yours. Every grant ends with a story or playbook, so the next one can start where you left off.</p></div>
+      <div class="what-head">
+        <p class="eyebrow">The program</p>
+        <h2 class="what-title">What it is, what we fund, how it works, and whether it's you.</h2>
       </div>
-    </div>
-    <div class="grow">
-      <div class="grow-media">
-        <div class="grow-scene" aria-hidden="true">
-          <video class="grow-video js-loop" src="assets/media/hero-island.mp4" poster="assets/media/hero-island-poster.jpg" autoplay muted loop playsinline preload="auto"></video>
-          <div class="chat">
-            <p class="bubble">Ours is the only lane in Yelahanka where the drain overflows every monsoon.<time>9:12 am</time></p>
-            <p class="bubble me">This fixed the same issue in Jayanagar. Should we try it here?<time>9:15 am</time></p>
-            <p class="bubble">Can we do it Saturday morning? I'll bring tools.<time>9:20 am</time></p>
+      <div class="what-tabs" role="tablist" aria-label="The program">
+        <button role="tab" id="t-about" aria-controls="about" aria-selected="true" data-tab="about"><span>01</span>About</button>
+        <button role="tab" id="t-fund" aria-controls="fund" aria-selected="false" tabindex="-1" data-tab="fund"><span>02</span>What we fund</button>
+        <button role="tab" id="t-how" aria-controls="how" aria-selected="false" tabindex="-1" data-tab="how"><span>03</span>How it works</button>
+        <button role="tab" id="t-fit" aria-controls="fit" aria-selected="false" tabindex="-1" data-tab="fit"><span>04</span>Is this you?</button>
+      </div>
+
+      <div class="what-card">
+        <!-- About -->
+        <div class="panel panel-about" id="about" role="tabpanel" aria-labelledby="t-about">
+          <div class="about-copy">
+            <h3 class="fill-text">Small, short-term grants for people <em>already solving</em> neighbourhood problems, who just need a push across the finish line.</h3>
+            <div class="about-points">
+              <div><h4><i class="fa-solid fa-house-chimney"></i> Solve it where you live</h4><p>The people who live with a problem know it best. We back fixes led by the neighbourhood itself.</p></div>
+              <div><h4><i class="fa-solid fa-arrows-rotate"></i> Borrow, don't reinvent</h4><p>If a fix worked in one neighbourhood, adapt it for yours. Every grant ends with a story or playbook the next one can use.</p></div>
+            </div>
           </div>
-        </div>
-        <div class="stamps">
+          <div class="about-media">
+            <div class="about-frame" aria-hidden="true">
+              <video class="grow-video js-loop" src="assets/media/hero-island.mp4" poster="assets/media/hero-island-poster.jpg" autoplay muted loop playsinline preload="auto"></video>
+              <div class="chat">
+                <p class="bubble">Ours is the only lane in Yelahanka where the drain overflows every monsoon.</p>
+                <p class="bubble me">This fixed the same issue in Jayanagar. Let's try it here.</p>
+              </div>
+            </div>
+            <div class="stamps">
           <svg class="stamp" viewBox="0 0 160 160" role="img" aria-label="Grant size: 50 thousand to 2 lakh rupees"><circle cx="80" cy="80" r="78" fill="#214895"/><circle cx="80" cy="80" r="58" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="1.5"/><path id="arc1" d="M 15 80 A 65 65 0 0 1 145 80" fill="none"/><text class="stamp-arc" fill="#FFFFFF"><textPath href="#arc1" startOffset="50%" text-anchor="middle">GRANT SIZE</textPath></text><text class="stamp-main" x="80" y="88" text-anchor="middle" font-size="34" fill="#FFFFFF">₹50K</text><text class="stamp-sub" x="80" y="110" text-anchor="middle" fill="#FFFFFF">to ₹2 lakh</text></svg>
           <svg class="stamp" viewBox="0 0 160 160" role="img" aria-label="Up to 6 months"><circle cx="80" cy="80" r="78" fill="#FFFFFF"/><circle cx="80" cy="80" r="58" fill="none" stroke="rgba(33,72,149,.35)" stroke-width="1.5"/><path id="arc2" d="M 15 80 A 65 65 0 0 1 145 80" fill="none"/><text class="stamp-arc" fill="#214895"><textPath href="#arc2" startOffset="50%" text-anchor="middle">UP TO</textPath></text><text class="stamp-main" x="80" y="88" text-anchor="middle" font-size="50" fill="#214895">6</text><text class="stamp-sub" x="80" y="110" text-anchor="middle" fill="#214895">months</text></svg>
           <svg class="stamp" viewBox="0 0 160 160" role="img" aria-label="Open in Bengaluru only"><circle cx="80" cy="80" r="78" fill="#214895"/><circle cx="80" cy="80" r="58" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="1.5"/><path id="arc3" d="M 15 80 A 65 65 0 0 1 145 80" fill="none"/><text class="stamp-arc" fill="#FFFFFF"><textPath href="#arc3" startOffset="50%" text-anchor="middle">OPEN IN</textPath></text><text class="stamp-main" x="80" y="88" text-anchor="middle" font-size="19" fill="#FFFFFF">Bengaluru</text><text class="stamp-sub" x="80" y="110" text-anchor="middle" fill="#FFFFFF">only</text></svg>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 3. WHAT WE FUND: pinned showcase, cloud bubble, pills -->
-  <section class="fund" id="fund" data-nav="What we fund">
-    <div class="fund-stage">
-      <p class="fund-kicker">What we fund. <span>Pick a theme, or scroll.</span></p>
-      <div class="cloud-bubble" id="fundBubble">
-        <h3 id="fundTitle">Public spaces</h3>
-        <p id="fundLine">Parks, footpaths, play areas, bus stops</p>
-        <button class="details-btn" id="fundDetailsBtn" aria-expanded="false" aria-controls="fundDetails">Details <i class="fa-solid fa-plus"></i></button>
-        <p class="fund-details" id="fundDetails" hidden></p>
-      </div>
-      <div class="fund-tile" id="fundTile" aria-hidden="true"><i class="fa-solid fa-tree-city" id="fundIcon"></i></div>
-      <div class="fund-pills" role="tablist" aria-label="Themes">
-        <button class="pill is-active" role="tab" aria-selected="true" data-i="0">Public spaces</button>
-        <button class="pill" role="tab" aria-selected="false" data-i="1">Waste</button>
-        <button class="pill" role="tab" aria-selected="false" data-i="2">Water</button>
-        <button class="pill" role="tab" aria-selected="false" data-i="3">Trees and greening</button>
-        <button class="pill" role="tab" aria-selected="false" data-i="4">Walking and mobility</button>
-      </div>
-      <div class="clouds clouds-low" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-    </div>
-  </section>
-
-  <!-- 4. RANGE LINE -->
-  <section class="range" data-nav="Grant size">
-    <div class="wrap range-wrap">
-      <div class="range-line">
-        <span class="range-end">from ₹50,000</span>
-        <div class="range-track">
-          <span class="range-bar"></span>
-          <span class="range-item r1"><i class="fa-solid fa-seedling"></i><small>Seed a pilot</small></span>
-          <span class="range-item r2"><i class="fa-solid fa-toolbox"></i><small>Kits and materials</small></span>
-          <span class="range-item r3"><i class="fa-solid fa-trowel-bricks"></i><small>Build it out</small></span>
-          <span class="range-item r4"><i class="fa-solid fa-people-roof"></i><small>Finish the fix</small></span>
+          </div>
         </div>
-        <span class="range-end">to ₹2,00,000</span>
-      </div>
-      <p class="range-text reveal">Grants of ₹50,000 to ₹2,00,000 for up to 6 months, sized to what your fix needs. About 10 grants in this round, decided as applications come in.</p>
-    </div>
-  </section>
 
-  <!-- 5. HOW IT WORKS: tabs with active dot, arc panel -->
-  <section class="how" id="how" data-nav="How it works">
-    <div class="how-stage">
-      <div class="how-card" aria-hidden="true"><span id="howBig">01</span><i class="fa-solid fa-pen-to-square" id="howIcon"></i></div>
-      <div class="how-mid">
-        <ol class="how-tabs" role="tablist" aria-label="Steps">
-          <li><button role="tab" aria-selected="true" data-i="0" class="is-active">You apply</button></li>
-          <li><button role="tab" aria-selected="false" data-i="1">We get to know you</button></li>
-          <li><button role="tab" aria-selected="false" data-i="2">The decision</button></li>
-          <li><button role="tab" aria-selected="false" data-i="3">Funds arrive</button></li>
-        </ol>
-        <p class="how-text" id="howText">Fill in and submit the application form linked at the end of this page.</p>
-      </div>
-      <div class="how-arc" id="howArc" aria-hidden="true">
-        <div class="how-arc-scene" id="howScene"><i class="fa-solid fa-file-pen"></i><span>Photo for this step</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 6. DARK: rolling call -->
-  <section class="rolling" id="rolling" data-nav="Rolling call">
-    <div class="rolling-bg" aria-hidden="true"><i></i><i></i><i></i></div>
-    <div class="rolling-inner">
-      <h2 class="rolling-title words">Rolling call. Six weeks, give or take.</h2>
-      <p class="rolling-para words">Applications stay open until the funds are used, and decisions are made as they come in. No deadline to chase. No interim reports either: just tell us how it's going.</p>
-      <div class="checks">
-        <div><h3>Who it's for</h3><ul><li>Individuals, collectives and organisations</li><li>Based in Bengaluru</li><li>Tackling a specific neighbourhood problem</li><li>With an idea that could travel</li></ul></div>
-        <div><h3>What we ask at the end</h3><ul><li>A story or playbook of your fix</li><li>A fund utilisation certificate</li><li>That's it. No interim reports.</li></ul></div>
-      </div>
-    </div>
-    <span class="scroll-hint"><i class="fa-solid fa-angles-down"></i> Scroll to learn more</span>
-  </section>
-
-  <!-- 7. CITY: disc with pins -->
-  <section class="city" data-nav="Across the city">
-    <div class="wrap">
-      <h2 class="city-title">From one lane to the whole city</h2>
-      <div class="city-grid">
-        <ul class="arrows">
-          <li class="reveal">Open to individuals, collectives and organisations <small>Resident groups · NGOs · neighbours</small></li>
-          <li class="reveal">Decided as applications come in, no deadline to chase</li>
-          <li class="reveal">Every fix becomes a story the next neighbourhood can borrow</li>
-        </ul>
-        <svg class="city-disc" viewBox="0 0 500 500" role="img" aria-label="Stylised map of Bengaluru with neighbourhood pins">
-          <circle class="orbit" cx="250" cy="250" r="240" fill="none" stroke="#9DB7D6" stroke-width="1"/>
-          <circle class="orbit" cx="250" cy="250" r="210" fill="none" stroke="#9DB7D6" stroke-width="1" stroke-dasharray="4 6"/>
-          <circle cx="250" cy="250" r="185" fill="#7F99B8"/>
-          <path d="M120 170 C 170 110, 300 90, 370 150 C 430 200, 420 300, 360 360 C 300 420, 180 410, 130 340 C 90 280, 90 210, 120 170 Z" fill="#F4EFD9"/>
-          <!-- lakes -->
-          <ellipse cx="300" cy="210" rx="18" ry="11" fill="#8FC3E2"/><ellipse cx="200" cy="300" rx="14" ry="9" fill="#8FC3E2"/><ellipse cx="320" cy="320" rx="20" ry="10" fill="#8FC3E2"/><ellipse cx="170" cy="200" rx="10" ry="7" fill="#8FC3E2"/>
-          <!-- roads -->
-          <circle cx="250" cy="255" r="95" fill="none" stroke="#E2D6BA" stroke-width="5"/>
-          <path d="M250 110 L250 400 M120 255 L390 255 M150 160 L350 360 M350 150 L150 360" stroke="#E2D6BA" stroke-width="3"/>
-          <!-- green areas -->
-          <path d="M230 230 q20 -18 40 0 q-4 22 -20 24 q-18 -4 -20 -24z" fill="#9CCB6A"/>
-          <g class="pins">
-            <g transform="translate(250 130)"><path d="M0 0 c-9 -12 -9 -24 0 -24 c9 0 9 12 0 24z" fill="#37863A"/><circle cy="-16" r="3.5" fill="#fff"/><text y="-30" text-anchor="middle">Yelahanka</text></g>
-            <g transform="translate(330 205)"><path d="M0 0 c-9 -12 -9 -24 0 -24 c9 0 9 12 0 24z" fill="#37863A"/><circle cy="-16" r="3.5" fill="#fff"/><text y="-30" text-anchor="middle">Hebbal</text></g>
-            <g transform="translate(372 270)"><path d="M0 0 c-9 -12 -9 -24 0 -24 c9 0 9 12 0 24z" fill="#37863A"/><circle cy="-16" r="3.5" fill="#fff"/><text y="-30" text-anchor="middle">Whitefield</text></g>
-            <g transform="translate(205 225)"><path d="M0 0 c-9 -12 -9 -24 0 -24 c9 0 9 12 0 24z" fill="#37863A"/><circle cy="-16" r="3.5" fill="#fff"/><text y="-30" text-anchor="middle">Malleswaram</text></g>
-            <g transform="translate(285 285)"><path d="M0 0 c-9 -12 -9 -24 0 -24 c9 0 9 12 0 24z" fill="#37863A"/><circle cy="-16" r="3.5" fill="#fff"/><text y="-30" text-anchor="middle">Frazer Town</text></g>
-            <g transform="translate(225 345)"><path d="M0 0 c-9 -12 -9 -24 0 -24 c9 0 9 12 0 24z" fill="#37863A"/><circle cy="-16" r="3.5" fill="#fff"/><text y="-30" text-anchor="middle">Jayanagar</text></g>
-            <g transform="translate(310 365)"><path d="M0 0 c-9 -12 -9 -24 0 -24 c9 0 9 12 0 24z" fill="#37863A"/><circle cy="-16" r="3.5" fill="#fff"/><text y="-30" text-anchor="middle">HSR Layout</text></g>
-            <g transform="translate(165 300)"><path d="M0 0 c-9 -12 -9 -24 0 -24 c9 0 9 12 0 24z" fill="#37863A"/><circle cy="-16" r="3.5" fill="#fff"/><text y="-30" text-anchor="middle">Basavanagudi</text></g>
-          </g>
-        </svg>
-        <div class="city-side reveal">
-          <p>Small grants for neighbourhood problems across Bengaluru, from a single lane to a whole ward. Pins are illustrative.</p>
-          <a href="#fit" class="btn btn-green">Take the 30-second check</a>
+        <!-- What we fund -->
+        <div class="panel panel-fund" id="fund" role="tabpanel" aria-labelledby="t-fund">
+          <div class="fund-top">
+            <ol class="fund-pills" role="tablist" aria-label="Themes">
+              <li><button class="pill is-active" role="tab" aria-selected="true" data-i="0">Public spaces</button></li>
+              <li><button class="pill" role="tab" aria-selected="false" data-i="1">Waste</button></li>
+              <li><button class="pill" role="tab" aria-selected="false" data-i="2">Water</button></li>
+              <li><button class="pill" role="tab" aria-selected="false" data-i="3">Trees and greening</button></li>
+              <li><button class="pill" role="tab" aria-selected="false" data-i="4">Walking and mobility</button></li>
+            </ol>
+            <div class="fund-tile" id="fundTile" aria-hidden="true"><i class="fa-solid fa-tree-city" id="fundIcon"></i></div>
+            <div class="cloud-bubble" id="fundBubble" aria-live="polite">
+              <h3 id="fundTitle">Public spaces</h3>
+              <p class="fund-line" id="fundLine">Parks, footpaths, play areas, bus stops</p>
+              <p class="fund-details" id="fundDetails"></p>
+            </div>
+          </div>
+          <div class="range">
+            <div class="range-head"><h4>Sized to your fix</h4><p>Up to 6 months · About 10 grants · Decided as applications come in</p></div>
+            <div class="range-ends"><span>from ₹50,000</span><span>to ₹2,00,000</span></div>
+            <div class="range-bar"></div>
+            <ol class="range-steps">
+              <li class="range-item"><i class="fa-solid fa-seedling"></i><span>Seed a pilot</span></li>
+              <li class="range-item"><i class="fa-solid fa-toolbox"></i><span>Kits and materials</span></li>
+              <li class="range-item"><i class="fa-solid fa-trowel-bricks"></i><span>Build it out</span></li>
+              <li class="range-item"><i class="fa-solid fa-people-roof"></i><span>Finish the fix</span></li>
+            </ol>
+          </div>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- 8. FIT CHECK -->
-  <section class="fit" id="fit" data-nav="Is this you?">
-    <div class="wrap">
-      <h2 class="center reveal">Thirty seconds to see if your idea fits.</h2>
-      <div class="sentence reveal">
+        <!-- How it works -->
+        <div class="panel panel-how" id="how" role="tabpanel" aria-labelledby="t-how">
+          <div class="how-grid">
+            <div class="how-left">
+              <p class="how-kicker">Rolling call. Six weeks, give or take.</p>
+              <ol class="how-tabs" role="tablist" aria-label="Steps">
+                <li><button role="tab" aria-selected="true" data-i="0" class="is-active"><b>01</b>You apply</button></li>
+                <li><button role="tab" aria-selected="false" data-i="1"><b>02</b>We get to know you</button></li>
+                <li><button role="tab" aria-selected="false" data-i="2"><b>03</b>The decision</button></li>
+                <li><button role="tab" aria-selected="false" data-i="3"><b>04</b>Funds arrive</button></li>
+              </ol>
+            </div>
+            <div class="how-detail">
+              <div class="how-detail-text">
+                <div class="how-num"><span id="howBig">01</span><i class="fa-solid fa-pen-to-square" id="howIcon"></i></div>
+                <p class="how-text" id="howText">Fill in and submit the application form linked at the end of this page.</p>
+                <div class="step-nav"><button class="round-btn" id="howPrev" aria-label="Previous step"><i class="fa-solid fa-arrow-left"></i></button><button class="round-btn round-btn-dark" id="howNext" aria-label="Next step"><i class="fa-solid fa-arrow-right"></i></button></div>
+              </div>
+              <div class="how-arc" aria-hidden="true"><div class="how-arc-scene" id="howScene"><i class="fa-solid fa-file-pen"></i></div></div>
+            </div>
+          </div>
+          <div class="checks">
+            <div><h4>Who it's for</h4><ul><li>Individuals, collectives and organisations</li><li>Based in Bengaluru</li><li>Tackling a specific neighbourhood problem</li><li>With an idea that could travel</li></ul></div>
+            <div><h4>What we ask at the end</h4><ul><li>A story or playbook of your fix</li><li>A fund utilisation certificate</li><li>That's it. No interim reports.</li></ul></div>
+          </div>
+        </div>
+
+        <!-- Is this you? -->
+        <div class="panel panel-fit" id="fit" role="tabpanel" aria-labelledby="t-fit">
+          <h3 class="fit-title">Thirty seconds to see if your idea fits.</h3>
+          <div class="sentence">
         <span>I'm</span>
         <label class="sr" for="fitWho">Who you are</label>
         <select id="fitWho"><option>an individual</option><option selected>a collective</option><option>an organisation</option></select>
@@ -242,17 +196,19 @@
         <label class="sr" for="fitWhere">Your neighbourhood</label>
         <input id="fitWhere" type="text" placeholder="your neighbourhood" maxlength="40" autocomplete="off">
       </div>
-      <div class="fit-grid">
-        <ol class="qs">
-          <li class="q reveal" data-q="1"><span class="qn">01</span><span id="q1">Are you based in Bengaluru?</span><span class="qa" role="radiogroup" aria-labelledby="q1"><button role="radio" aria-checked="false" data-a="yes">Yes</button><button role="radio" aria-checked="false" data-a="no">Not quite</button></span></li>
-          <li class="q reveal" data-q="2"><span class="qn">02</span><span id="q2">Are you tackling a specific neighbourhood problem or opportunity?</span><span class="qa" role="radiogroup" aria-labelledby="q2"><button role="radio" aria-checked="false" data-a="yes">Yes</button><button role="radio" aria-checked="false" data-a="no">Not quite</button></span></li>
-          <li class="q reveal" data-q="3"><span class="qn">03</span><span id="q3">Could your idea or solution work in another neighbourhood too?</span><span class="qa" role="radiogroup" aria-labelledby="q3"><button role="radio" aria-checked="false" data-a="yes">Yes</button><button role="radio" aria-checked="false" data-a="no">Not quite</button></span></li>
+          <div class="fit-grid">
+            <ol class="qs">
+          <li class="q" data-q="1"><span class="qn">01</span><span id="q1">Are you based in Bengaluru?</span><span class="qa" role="radiogroup" aria-labelledby="q1"><button role="radio" aria-checked="false" data-a="yes">Yes</button><button role="radio" aria-checked="false" data-a="no">Not quite</button></span></li>
+          <li class="q" data-q="2"><span class="qn">02</span><span id="q2">Are you tackling a specific neighbourhood problem or opportunity?</span><span class="qa" role="radiogroup" aria-labelledby="q2"><button role="radio" aria-checked="false" data-a="yes">Yes</button><button role="radio" aria-checked="false" data-a="no">Not quite</button></span></li>
+          <li class="q" data-q="3"><span class="qn">03</span><span id="q3">Could your idea or solution work in another neighbourhood too?</span><span class="qa" role="radiogroup" aria-labelledby="q3"><button role="radio" aria-checked="false" data-a="yes">Yes</button><button role="radio" aria-checked="false" data-a="no">Not quite</button></span></li>
         </ol>
-        <div class="verdict reveal" id="verdict" data-state="idle" aria-live="polite">
-          <div class="verdict-progress"><span id="verdictBar"></span></div>
-          <p class="verdict-title" id="verdictTitle">Answer all three.</p>
-          <p class="verdict-text" id="verdictText">Your verdict shows up here. Nothing is saved or sent.</p>
-          <a href="#apply" class="btn btn-green" id="verdictCta" hidden>Apply now</a>
+            <div class="verdict" id="verdict" data-state="idle" aria-live="polite">
+              <div class="verdict-progress"><span id="verdictBar"></span></div>
+              <p class="verdict-title" id="verdictTitle">Answer all three.</p>
+              <p class="verdict-text" id="verdictText">Your verdict shows up here. Nothing is saved or sent.</p>
+              <a href="#apply" class="btn btn-green" id="verdictCta" hidden>Apply now</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -289,7 +245,7 @@
       <p class="apply-soon" id="applySoon" hidden>Application form opens soon</p>
     </div>
     <div class="wrap footer-cols">
-      <div><h4>Quick links</h4><a href="#home">Home</a><a href="#about">About</a><a href="#fund">What we fund</a><a href="#how">How it works</a><a href="#faq">FAQs</a></div>
+      <div><h4>Quick links</h4><a href="#home">Home</a><a href="#about" data-tab="about">About</a><a href="#fund" data-tab="fund">What we fund</a><a href="#how" data-tab="how">How it works</a><a href="#fit" data-tab="fit">Is this you?</a><a href="#faq">FAQs</a></div>
       <svg class="footer-globe" viewBox="0 0 400 220" aria-hidden="true"><circle cx="200" cy="220" r="190" fill="#7F99B8"/><path d="M60 200 C 100 120, 260 90, 330 160 C 350 180, 345 205, 340 220 L70 220 Z" fill="#F4EFD9"/><circle cx="200" cy="220" r="210" fill="none" stroke="#9DB7D6"/></svg>
       <div><h4>Get in touch</h4><a href="#apply">Apply now</a><span class="tbd">[contact email]</span><a href="https://www.notf.in">notf.in</a></div>
     </div>
