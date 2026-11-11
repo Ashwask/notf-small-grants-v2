@@ -127,7 +127,7 @@
       $('#stepText').textContent = st.t; $('#stepTag').textContent = st.tag;
       $('#stepNum').textContent = '0' + (i + 1); $('#stepIcon').className = 'fa-solid ' + st.i;
       $('#stepScene').style.background = st.bg;
-      $('#stepCount').textContent = (i + 1) + ' / ' + steps.length;
+      $('#stepBar').style.width = ((i + 1) / steps.length * 100) + '%';
     };
     if (!animate) { apply(); return; }
     gsap.to(['#stepText', '#stepTag', '.step-card'], { opacity: 0, y: -10, duration: .18, ease: 'power2.in', onComplete: function () {
@@ -136,27 +136,19 @@
       gsap.fromTo('.step-card', { opacity: 0, y: 26, rotation: -4 }, { opacity: 1, y: 0, rotation: 0, duration: .6, ease: 'back.out(1.6)' });
     } });
   }
+  // Scroll drives the steps (pinned below, in the GSAP section); clicking a step jumps the scroll there
+  var stepST = null;
+  function goToStep(k) {
+    if (stepST) window.scrollTo({ top: stepST.start + (k + .5) / steps.length * (stepST.end - stepST.start), behavior: reduce ? 'auto' : 'smooth' });
+    else setStep(k);
+  }
   stepBtns.forEach(function (b, k) {
-    b.addEventListener('click', function () { stopAuto(); setStep(k); });
+    b.addEventListener('click', function () { goToStep(k); });
     b.addEventListener('keydown', function (e) {
       var d = e.key === 'ArrowDown' || e.key === 'ArrowRight' ? 1 : e.key === 'ArrowUp' || e.key === 'ArrowLeft' ? -1 : 0;
-      if (d) { e.preventDefault(); stopAuto(); setStep(stepIdx + d, true); }
+      if (d) { e.preventDefault(); var n = Math.max(0, Math.min(steps.length - 1, stepIdx + d)); goToStep(n); stepBtns[n].focus(); }
     });
   });
-  $('#stepPrev').addEventListener('click', function () { stopAuto(); setStep(stepIdx - 1); });
-  $('#stepNext').addEventListener('click', function () { stopAuto(); setStep(stepIdx + 1); });
-  // Auto-advance every 4.5s while the section is on screen, until someone interacts
-  var autoTimer = null, autoStopped = false;
-  function stopAuto() { autoStopped = true; clearInterval(autoTimer); autoTimer = null; }
-  if (!reduce && 'IntersectionObserver' in window) {
-    new IntersectionObserver(function (es) {
-      es.forEach(function (e) {
-        if (autoStopped) return;
-        if (e.isIntersecting && !autoTimer) autoTimer = setInterval(function () { setStep(stepIdx + 1); }, 4500);
-        if (!e.isIntersecting && autoTimer) { clearInterval(autoTimer); autoTimer = null; }
-      });
-    }, { threshold: .5 }).observe($('.stepper'));
-  }
 
   /* ---------- Fit checker ---------- */
   var answers = {};
@@ -300,6 +292,12 @@
     .from('.gs-item', { y: 60, opacity: 0, scale: .4, stagger: .32, duration: .55, ease: 'back.out(2.4)' }, .45)
     .from('.gs-item small', { y: 10, opacity: 0, stagger: .32, duration: .4 }, .65)
     .from('.gs-text', { y: 30, opacity: 0, duration: .5 }, 1.6);
+
+  /* How it works: pin the stepper; scrolling moves through the four steps */
+  stepST = ScrollTrigger.create({
+    trigger: '.stepper', start: 'center center', end: '+=' + (steps.length * 60) + '%', pin: true, anticipatePin: 1,
+    onUpdate: function (self) { setStep(Math.min(steps.length - 1, Math.floor(self.progress * steps.length))); }
+  });
 
   /* Each section's entrance plays once, when it scrolls into view */
   Object.keys(entrances).forEach(function (id) {
