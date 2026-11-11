@@ -100,7 +100,7 @@
     gsap.fromTo(panel, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: .55, ease: 'power3.out' });
     if (name === 'about' && !aboutPlayed) {
       aboutPlayed = true;
-      gsap.fromTo(fillWords, { color: 'rgba(33,72,149,.16)' }, { color: function (i, el) { return el.closest('em') ? '#37863A' : '#214895'; }, stagger: .04, duration: .4, ease: 'none' });
+      gsap.fromTo(fillWords, { color: 'rgba(16,54,87,.16)' }, { color: function (i, el) { return el.closest('em') ? '#3C5631' : '#103657'; }, stagger: .04, duration: .4, ease: 'none' });
       gsap.from('.principle', { y: 24, opacity: 0, stagger: .1, duration: .55, ease: 'power3.out', delay: .3 });
       gsap.from('.stamp', { scale: 0, rotation: -45, opacity: 0, stagger: .12, duration: .7, ease: 'back.out(2.2)', delay: .5 });
     }
@@ -319,10 +319,10 @@
 
   var heroWords = splitWords($('.hero-title'));
   gsap.set('.reveal', { opacity: 0, y: 30 });
-  gsap.set(['.hero-kicker', '.hero-sub', '.hero-place', '.hero-btns'], { opacity: 0, y: 20 });
+  gsap.set(['.hero-kicker', '.hero-place', '.hero-btns'], { opacity: 0, y: 20 });
   gsap.set(heroWords, { yPercent: 110, opacity: 0 });
   gsap.set('.island', { y: 160, opacity: 0 });
-  gsap.set(fillWords, { color: 'rgba(33,72,149,.16)' });
+  gsap.set(fillWords, { color: 'rgba(16,54,87,.16)' });
 
   /* Loader → hero intro */
   var counter = { v: 0 };
@@ -333,7 +333,7 @@
     .add(function () { $('.loader').remove(); })
     .to(heroWords, { yPercent: 0, opacity: 1, stagger: .07, duration: .9, ease: 'power4.out' }, '-=0.45')
     .to('.hero-kicker', { opacity: 1, y: 0, duration: .6 }, '-=0.9')
-    .to(['.hero-sub', '.hero-place'], { opacity: 1, y: 0, stagger: .1, duration: .7 }, '-=0.6')
+    .to('.hero-place', { opacity: 1, y: 0, duration: .7 }, '-=0.6')
     .to('.hero-btns', { opacity: 1, y: 0, duration: .6, ease: 'back.out(2)', clearProps: 'transform' }, '-=0.5')
     .to('.island', { y: 0, opacity: 1, duration: 1.3, ease: 'back.out(1.2)' }, '-=1.1');
 
