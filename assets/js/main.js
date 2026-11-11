@@ -45,14 +45,23 @@
     return $$('.w', el);
   }
 
-  /* ---------- Rotating neighbourhood ---------- */
-  var places = ['Yelahanka', 'Jayanagar', 'Whitefield', 'Malleswaram', 'HSR Layout', 'Frazer Town', 'Basavanagudi', 'Hebbal'];
+  /* ---------- Rotating neighbourhood: always rotates (by request, also with reduced motion) ---------- */
+  var places = ['Basavanagudi', 'Yelahanka', 'Jayanagar', 'Whitefield', 'Malleswaram', 'HSR Layout', 'Frazer Town', 'Hebbal'];
   var placeEl = $('#place'), pi = 0;
-  if (placeEl && !reduce) {
+  if (placeEl) {
+    placeEl.textContent = places[0];
     setInterval(function () {
-      placeEl.classList.add('swap');
-      setTimeout(function () { pi = (pi + 1) % places.length; placeEl.textContent = places[pi]; placeEl.classList.remove('swap'); }, 250);
-    }, 2400);
+      // roll: current name slides up and out, next slides in from below
+      placeEl.classList.add('roll-out');
+      setTimeout(function () {
+        pi = (pi + 1) % places.length;
+        placeEl.textContent = places[pi];
+        placeEl.classList.remove('roll-out');
+        placeEl.classList.add('roll-in');
+        void placeEl.offsetWidth; // restart transition
+        placeEl.classList.remove('roll-in');
+      }, 280);
+    }, 2200);
   }
 
   /* ---------- Bottom nav pill ---------- */
@@ -319,7 +328,7 @@
 
   var heroWords = splitWords($('.hero-title'));
   gsap.set('.reveal', { opacity: 0, y: 30 });
-  gsap.set(['.hero-kicker', '.hero-place', '.hero-btns'], { opacity: 0, y: 20 });
+  gsap.set(['.hero-place', '.hero-btns'], { opacity: 0, y: 20 });
   gsap.set(heroWords, { yPercent: 110, opacity: 0 });
   gsap.set('.island', { y: 160, opacity: 0 });
   gsap.set(fillWords, { color: 'rgba(16,54,87,.16)' });
@@ -332,7 +341,6 @@
     .to('.loader', { yPercent: -100, duration: .8, ease: 'power4.inOut' })
     .add(function () { $('.loader').remove(); })
     .to(heroWords, { yPercent: 0, opacity: 1, stagger: .07, duration: .9, ease: 'power4.out' }, '-=0.45')
-    .to('.hero-kicker', { opacity: 1, y: 0, duration: .6 }, '-=0.9')
     .to('.hero-place', { opacity: 1, y: 0, duration: .7 }, '-=0.6')
     .to('.hero-btns', { opacity: 1, y: 0, duration: .6, ease: 'back.out(2)', clearProps: 'transform' }, '-=0.5')
     .to('.island', { y: 0, opacity: 1, duration: 1.3, ease: 'back.out(1.2)' }, '-=1.1');
