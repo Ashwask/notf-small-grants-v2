@@ -105,11 +105,9 @@
       gsap.from('.stamp', { scale: 0, rotation: -45, opacity: 0, stagger: .12, duration: .7, ease: 'back.out(2.2)', delay: .5 });
     }
     if (name === 'fund') {
-      gsap.from('#fundTile', { y: 60, rotation: -6, opacity: 0, duration: .8, ease: 'back.out(1.4)' });
-      gsap.from('.cloud-bubble', { y: 20, opacity: 0, duration: .6, ease: 'back.out(1.6)', delay: .1 });
-      gsap.timeline({ delay: .2 })
-        .from('.range-bar', { scaleX: 0, duration: .8, ease: 'power2.inOut' })
-        .from('.range-item', { opacity: 0, y: 30, scale: .5, stagger: .1, duration: .45, ease: 'back.out(2)' }, '-=0.5');
+      gsap.from('.theme', { y: 24, opacity: 0, stagger: .07, duration: .55, ease: 'power3.out' });
+      gsap.from('.size', { y: 20, opacity: 0, duration: .55, delay: .35 });
+      gsap.fromTo('.size-fill', { scaleX: 0 }, { scaleX: 1, duration: 1.1, delay: .5, ease: 'power2.inOut' });
     }
     if (name === 'how') {
       var tl = $('.timeline');
@@ -222,37 +220,6 @@
   // Initial: hide non-active panels (they stay visible if JS fails); honour a deep link
   var initial = tabNames.indexOf(location.hash.slice(1)) >= 0 ? location.hash.slice(1) : 'about';
   showTab(initial);
-
-  /* ---------- What we fund ---------- */
-  var themes = [
-    { t: 'Public spaces', l: 'Parks, footpaths, play areas, bus stops', d: 'Reclaim a corner, fix a footpath, light up a dark stretch, or turn a dumping spot into a place people stop and sit.', i: 'fa-tree-city' },
-    { t: 'Waste', l: 'Segregation, composting, clean streets', d: 'Ward-level composting, cutlery banks, segregation drives, or keeping a black spot clean for good.', i: 'fa-recycle' },
-    { t: 'Water', l: 'Lakes, drains, rainwater, flooding', d: 'Rain gardens, recharge wells, drain clean-ups, or a lake group that needs equipment to keep going.', i: 'fa-droplet' },
-    { t: 'Trees and greening', l: 'Street trees, gardens, shade', d: 'Planting and caring for street trees, shade for bus stops, or a community garden on an unused plot.', i: 'fa-seedling' },
-    { t: 'Walking and mobility', l: 'Safe streets, crossings, cycling', d: 'Safer school routes, crossings, cycle days, or signage that helps people walk their neighbourhood.', i: 'fa-person-walking' }
-  ];
-  var fundIdx = 0;
-  var fundPills = $$('.fund-pills .pill');
-  var details = $('#fundDetails');
-  function setTheme(i) {
-    if (i === fundIdx) return;
-    var dir = i > fundIdx ? 1 : -1;
-    fundIdx = i;
-    var th = themes[i];
-    fundPills.forEach(function (p, k) { p.classList.toggle('is-active', k === i); p.setAttribute('aria-selected', String(k === i)); });
-    var apply = function () {
-      $('#fundTitle').textContent = th.t; $('#fundLine').textContent = th.l; details.textContent = th.d;
-      $('#fundIcon').className = 'fa-solid ' + th.i;
-    };
-    if (!animate) { apply(); return; }
-    gsap.to(['#fundTile', '#fundBubble'], { rotationY: -90 * dir, opacity: 0, duration: .22, ease: 'power2.in', onComplete: function () {
-      apply();
-      gsap.fromTo('#fundTile', { rotationY: 90 * dir, opacity: 0 }, { rotationY: 0, opacity: 1, duration: .6, ease: 'back.out(1.5)' });
-      gsap.fromTo('#fundBubble', { rotationY: 0, opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: .45, ease: 'power3.out' });
-    } });
-  }
-  details.textContent = themes[0].d;
-  fundPills.forEach(function (p, k) { p.addEventListener('click', function () { setTheme(k); }); });
 
   /* ---------- Fit checker ---------- */
   var answers = {};
