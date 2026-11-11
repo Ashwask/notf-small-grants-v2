@@ -259,9 +259,11 @@
   /* ---------- Apply links ---------- */
   $$('.js-apply').forEach(function (a) {
     if (APPLY_URL) { a.href = APPLY_URL; a.target = '_blank'; a.rel = 'noopener'; return; }
+    // Form not live yet: show a clear "opens soon" state instead of a faded button
+    a.classList.remove('btn-green'); a.classList.add('btn-soon');
     a.setAttribute('aria-disabled', 'true');
+    a.innerHTML = '<i class="fa-regular fa-clock" aria-hidden="true"></i><span>Form opens soon</span>';
     a.addEventListener('click', function (e) { e.preventDefault(); });
-    $('#applySoon').hidden = false;
   });
 
   /* ---------- Without animation: done ---------- */
@@ -325,14 +327,15 @@
   /* Generic reveals (FAQ, footer) */
   ScrollTrigger.batch('.reveal', { start: 'top 88%', onEnter: function (els) { gsap.to(els, { opacity: 1, y: 0, stagger: .08, duration: .8, overwrite: true }); } });
 
-  /* Footer globe rises */
-  gsap.from('.footer-globe', { yPercent: 40, ease: 'none', scrollTrigger: { trigger: '.footer', start: 'top bottom', end: 'bottom bottom', scrub: true } });
 
   /* Nav label follows section (created last so positions include pin spacing) */
   $$('[data-nav]').forEach(function (s) {
     ScrollTrigger.create({ trigger: s, start: 'top 50%', end: 'bottom 50%', onToggle: function (self) { if (self.isActive) setNavLabel(s.dataset.nav); } });
   });
-  ScrollTrigger.create({ start: 120, end: 'max', toggleClass: { targets: '.topbar', className: 'scrolled' } });
+  // Frosted top bar once past the top (plain listener: a ScrollTrigger range drops the class at the very bottom)
+  var topbar = $('.topbar');
+  var setScrolled = function () { topbar.classList.toggle('scrolled', window.scrollY > 120); };
+  window.addEventListener('scroll', setScrolled, { passive: true }); setScrolled();
 
   window.addEventListener('load', function () { ScrollTrigger.refresh(); });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
