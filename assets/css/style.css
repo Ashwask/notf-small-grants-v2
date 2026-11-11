@@ -82,11 +82,7 @@ img, svg { display: block; max-width: 100%; }
 .topbar > * { pointer-events: auto; }
 .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 600; color: var(--navy); font-size: 15px; }
 .brand img { height: 52px; width: auto; }
-.topbar-cta { font-weight: 600; font-size: 15px; color: var(--navy); text-decoration: none; padding: 10px 4px; transition: opacity .2s; }
-.topbar-cta:hover { opacity: .7; }
-.topbar .brand, .topbar-cta { transition: color .3s ease, opacity .2s; }
-.topbar.on-dark .brand, .topbar.on-dark .topbar-cta { color: #fff; }
-.topbar { transition: background-color .3s ease, backdrop-filter .3s ease; }
+.topbar .brand, .topbar.on-dark .brand, .topbar.on-dark .topbar { transition: background-color .3s ease, backdrop-filter .3s ease; }
 .topbar.scrolled { background: rgba(254, 247, 230, .86); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
 .topbar.scrolled.on-dark { background: rgba(14, 26, 22, .6); }
 
