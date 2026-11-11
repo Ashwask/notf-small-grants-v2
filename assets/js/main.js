@@ -256,6 +256,29 @@
     if (animate && (state === 'fit' || state === 'nofit')) gsap.fromTo(title, { y: 10, opacity: 0 }, { y: 0, opacity: 1, duration: .4, ease: 'back.out(2)' });
   }
 
+  /* ---------- FAQ: one open at a time, smooth height ---------- */
+  var faqItems = $$('.faq-item');
+  faqItems.forEach(function (d) {
+    var sum = $('summary', d), body = $('.faq-a', d);
+    sum.addEventListener('click', function (e) {
+      e.preventDefault();
+      var opening = !d.open;
+      // close the others
+      faqItems.forEach(function (o) {
+        if (o === d || !o.open) return;
+        var ob = $('.faq-a', o);
+        if (animate) gsap.to(ob, { height: 0, duration: .3, ease: 'power2.inOut', onComplete: function () { o.open = false; ob.style.height = ''; } });
+        else o.open = false;
+      });
+      if (opening) {
+        d.open = true;
+        if (animate) gsap.fromTo(body, { height: 0 }, { height: body.scrollHeight, duration: .4, ease: 'power3.out', onComplete: function () { body.style.height = ''; } });
+      } else if (animate) {
+        gsap.to(body, { height: 0, duration: .3, ease: 'power2.inOut', onComplete: function () { d.open = false; body.style.height = ''; } });
+      } else { d.open = false; }
+    });
+  });
+
   /* ---------- Apply links ---------- */
   $$('.js-apply').forEach(function (a) {
     if (APPLY_URL) { a.href = APPLY_URL; a.target = '_blank'; a.rel = 'noopener'; return; }
