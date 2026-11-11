@@ -153,8 +153,12 @@ img, svg { display: block; max-width: 100%; }
 .bubble.me { justify-self: end; background: var(--green); color: #fff; border-radius: 16px 16px 4px 16px; }
 .bubble time { display: block; text-align: right; font-size: 11px; opacity: .6; margin-top: 2px; }
 .photo-note { position: absolute; top: 16%; left: 12%; color: rgba(255,255,255,.7); font-size: 13px; border: 1px dashed rgba(255,255,255,.5); padding: 4px 12px; border-radius: 99px; }
-.stamps { position: absolute; right: 6%; bottom: 10%; display: flex; gap: 0; }
-.stamp { width: clamp(90px, 10vw, 140px); margin-left: -14px; font-family: var(--display); filter: drop-shadow(0 8px 16px rgba(0,0,0,.25)); }
+.stamps { position: absolute; right: 6%; bottom: 10%; display: flex; gap: 14px; }
+.stamp { width: clamp(112px, 11vw, 156px); height: auto; filter: drop-shadow(0 10px 22px rgba(13,39,89,.35)); }
+.stamp text { font-family: var(--display); }
+.stamp-arc { font-size: 10.5px; font-weight: 600; letter-spacing: 3px; }
+.stamp-main { font-weight: 700; letter-spacing: -0.02em; }
+.stamp-sub { font-family: var(--body) !important; font-size: 13px; font-weight: 500; opacity: .9; }
 
 /* ---------- 3. FUND (pinned showcase) ---------- */
 .fund { position: relative; background: var(--sky); }
@@ -303,7 +307,8 @@ img, svg { display: block; max-width: 100%; }
   .about-cols { grid-template-columns: 1fr; gap: 28px; margin-top: 40px; }
   .grow { height: 80vh; }
   .grow-media { clip-path: inset(6% 4% 6% 4% round 16px); }
-  .stamps { right: 50%; transform: translateX(50%); bottom: auto; top: 6%; }
+  .stamps { left: 50%; right: auto; transform: translateX(-50%); bottom: auto; top: 13%; gap: 8px; width: max-content; }
+  .stamp { width: 100px; flex-shrink: 0; }
   .grow-scene .chat { left: 6%; width: 88%; bottom: 8%; }
   .photo-note { display: none; }
   .fund-kicker { position: static; text-align: center; margin-bottom: 40px; max-width: none; }
