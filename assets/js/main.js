@@ -319,7 +319,7 @@
 
   var heroWords = splitWords($('.hero-title'));
   gsap.set('.reveal', { opacity: 0, y: 30 });
-  gsap.set(['.hero-sub', '.hero-copy .btn'], { opacity: 0, y: 20 });
+  gsap.set(['.hero-kicker', '.hero-sub', '.hero-place', '.hero-btns'], { opacity: 0, y: 20 });
   gsap.set(heroWords, { yPercent: 110, opacity: 0 });
   gsap.set('.island', { y: 160, opacity: 0 });
   gsap.set(fillWords, { color: 'rgba(33,72,149,.16)' });
@@ -332,26 +332,22 @@
     .to('.loader', { yPercent: -100, duration: .8, ease: 'power4.inOut' })
     .add(function () { $('.loader').remove(); })
     .to(heroWords, { yPercent: 0, opacity: 1, stagger: .07, duration: .9, ease: 'power4.out' }, '-=0.45')
-    .to('.hero-sub', { opacity: 1, y: 0, duration: .7 }, '-=0.6')
-    .to('.hero-copy .btn', { opacity: 1, y: 0, duration: .6, ease: 'back.out(2)', clearProps: 'transform' }, '-=0.5')
+    .to('.hero-kicker', { opacity: 1, y: 0, duration: .6 }, '-=0.9')
+    .to(['.hero-sub', '.hero-place'], { opacity: 1, y: 0, stagger: .1, duration: .7 }, '-=0.6')
+    .to('.hero-btns', { opacity: 1, y: 0, duration: .6, ease: 'back.out(2)', clearProps: 'transform' }, '-=0.5')
     .to('.island', { y: 0, opacity: 1, duration: 1.3, ease: 'back.out(1.2)' }, '-=1.1');
 
   /* 1. Hero: short pin. Video zooms away, statement, then stats in quick succession */
-  var heroTl = gsap.timeline({ scrollTrigger: { trigger: '.hero', start: 'top top', end: '+=160%', scrub: .8, pin: true, anticipatePin: 1 } });
+  var heroTl = gsap.timeline({ scrollTrigger: { trigger: '.hero', start: 'top top', end: '+=110%', scrub: .8, pin: true, anticipatePin: 1 } });
   heroTl
-    .to('.hero-copy', { y: -120, opacity: 0, duration: .8, ease: 'none' }, 0)
-    .to('.hero-why', { opacity: 0, duration: .3 }, 0)
-    .to('.island-wrap', { scale: 1.8, yPercent: -12, opacity: 0, filter: 'blur(16px)', duration: 1.2, ease: 'power1.in' }, 0)
-    .to('.clouds-hero', { scale: 1.25, duration: 1.5 }, 0)
-    .to('.sky', { opacity: .6, duration: 1.2 }, 0)
-    .set('.statement', { opacity: 1 }, .7)
-    .fromTo('.statement-text', { y: 60, opacity: 0, filter: 'blur(14px)' }, { y: 0, opacity: 1, filter: 'blur(0px)', duration: .6 }, .7);
-  $$('.stat').forEach(function (s, i, all) {
-    var at = 1.2 + i * .6;
-    heroTl.fromTo(s, { opacity: 0, y: 30, filter: 'blur(10px)', scale: .92 }, { opacity: 1, y: 0, filter: 'blur(0px)', scale: 1, duration: .3, ease: 'back.out(1.6)' }, at);
-    if (i < all.length - 1) heroTl.to(s, { opacity: 0, y: -24, filter: 'blur(8px)', duration: .22, ease: 'power2.in' }, at + .4);
-  });
-  heroTl.to({}, { duration: .3 });
+    .to('.hero-copy', { y: -100, opacity: 0, duration: .6, ease: 'none' }, 0)
+    .to('.island-wrap', { scale: 1.7, yPercent: -10, opacity: 0, filter: 'blur(14px)', duration: 1, ease: 'power1.in' }, 0)
+    .to('.clouds-hero', { scale: 1.2, duration: 1.2 }, 0)
+    .to('.sky', { opacity: .6, duration: 1 }, 0)
+    .set('.statement', { opacity: 1, pointerEvents: 'auto' }, .55)
+    .fromTo('.statement-text', { y: 50, opacity: 0, filter: 'blur(10px)' }, { y: 0, opacity: 1, filter: 'blur(0px)', duration: .5 }, .55)
+    .fromTo('.stat', { y: 30, opacity: 0 }, { y: 0, opacity: 1, stagger: .12, duration: .4, ease: 'back.out(1.6)' }, .85)
+    .to({}, { duration: .4 });
 
   /* What header + tabs rise in; the open panel's entrance plays when the section arrives */
   gsap.from(['.what-head', '.what-tabs'], { y: 40, opacity: 0, stagger: .12, duration: .8, scrollTrigger: { trigger: '.what', start: 'top 75%' } });

@@ -57,32 +57,36 @@
 
 <main id="main">
 
-  <!-- 1. HERO (pinned: island zooms away, statement + stats appear) -->
+  <!-- 1. HERO (short pin: video zooms away, statement + four facts appear) -->
   <section class="hero" id="home" data-nav="Home">
     <div class="sky"></div>
     <div class="clouds clouds-hero" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
 
     <div class="hero-copy">
+      <p class="hero-kicker"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Neighbourhoods of the Future · Bengaluru</p>
       <h1 class="hero-title split"><span class="tone">The fix</span> is local.</h1>
-      <p class="hero-sub">Small grants for people, collectives and organisations solving neighbourhood problems in Bengaluru. Solve it in <span class="place" id="place">Yelahanka</span>. Share it with the city.</p>
-      <a href="#fit" class="btn btn-green" data-tab="fit">Is this you?</a>
+      <p class="hero-sub">Small grants of ₹50,000 to ₹2,00,000 for people, collectives and organisations solving neighbourhood problems in Bengaluru.</p>
+      <p class="hero-place">Solve it in <span class="place-slot"><span class="place" id="place">Yelahanka</span></span>. Share it with the city.</p>
+      <div class="hero-btns">
+        <a href="#fit" class="btn btn-green" data-tab="fit">Is this you?</a>
+        <a href="#how" class="btn btn-white" data-tab="how">How it works</a>
+      </div>
     </div>
 
     <div class="island-wrap">
       <video class="island js-loop" src="assets/media/hero-island.mp4" poster="assets/media/hero-island-poster.jpg" autoplay muted loop playsinline preload="auto" aria-label="Animation: an illustrated Bengaluru neighbourhood floating above the clouds"></video>
     </div>
 
-    <div class="statement" aria-hidden="true">
+    <div class="statement">
       <p class="statement-text">Neighbourhood fixes, funded in Bengaluru and shared with the city.</p>
       <div class="stats">
-        <div class="stat"><b>₹2,00,000</b><span>Maximum grant, starting from ₹50,000</span></div>
+        <div class="stat"><b>₹2,00,000</b><span>Maximum grant, from ₹50,000</span></div>
         <div class="stat"><b>6 months</b><span>Maximum grant duration</span></div>
         <div class="stat"><b>~10</b><span>Grants in this round</span></div>
-        <div class="stat"><b>0</b><span>Interim reports. Just a story at the end.</span></div>
+        <div class="stat"><b>0</b><span>Interim reports, just a story at the end</span></div>
       </div>
     </div>
 
-    <a href="#what" class="hero-why">Why apply? <i class="fa-solid fa-chevron-down"></i></a>
   </section>
 
   <!-- 2. WHAT: one section, four tabs (About / What we fund / How it works / Is this you?) -->
