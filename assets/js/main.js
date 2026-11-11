@@ -101,7 +101,7 @@
     if (name === 'about' && !aboutPlayed) {
       aboutPlayed = true;
       gsap.fromTo(fillWords, { color: 'rgba(33,72,149,.16)' }, { color: function (i, el) { return el.closest('em') ? '#37863A' : '#214895'; }, stagger: .04, duration: .4, ease: 'none' });
-      gsap.from('.about-frame .bubble', { y: 20, opacity: 0, stagger: .2, duration: .6, ease: 'back.out(1.6)', delay: .3 });
+      gsap.from('.principle', { y: 24, opacity: 0, stagger: .1, duration: .55, ease: 'power3.out', delay: .3 });
       gsap.from('.stamp', { scale: 0, rotation: -45, opacity: 0, stagger: .12, duration: .7, ease: 'back.out(2.2)', delay: .5 });
     }
     if (name === 'fund') {
