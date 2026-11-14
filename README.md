@@ -8,8 +8,11 @@ A one-page site for the **NoTF BLR Small Grants** program of [Neighbourhoods of 
 
 ## Run locally
 ```bash
+git clone https://github.com/Ashwask/notf-small-grants-v2.git ~/notf-small-grants-v2   # if the folder isn't there
+cd ~/notf-small-grants-v2
 python3 -m http.server 5175 --bind 127.0.0.1   # http://127.0.0.1:5175/
 ```
+GitHub is the source of truth. On 2026-11-14 the local folder had disappeared and was restored from GitHub with nothing lost, because every change had already been pushed. Keep pushing each change to `develop`.
 There is no build step. GSAP 3.12.5 and ScrollTrigger load from cdnjs, and Font Awesome 6.5.1 from cdnjs. There are no web fonts.
 
 ## Page structure
@@ -49,6 +52,10 @@ Buttons with white text use #B24C25, a deeper shade of the terracotta, because w
 ## Assets
 - `assets/media/hero-island-v2.mp4` is a web copy (1920×1280, 5.1 MB, no audio) of Ashwin's 7052×4700, 134 MB original. Same frames and timing; it's used in the hero, About and footer.
 - `assets/img/apply-now-animated.svg` is Ashwin's file, unmodified. It is CSS-animated only, with no scripts.
+
+## Status (2026-11-14)
+- The live preview matches `develop`. Last design change: a smaller hero island that zooms gently on scroll and never covers text.
+- Related: the live NoTF repo `urbanmorph/notf` (untouched). The v1 wireframe site (`~/notf-small-grants`) was local-only and its files were lost on 2026-11-13/14; this v2 repo is the only surviving version.
 
 ## Still to come (from Ashwin)
 - [ ] Four step images for the How it works arc. The slot is `<!-- step images go here -->` in `#stepScene`.
